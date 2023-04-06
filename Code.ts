@@ -44,7 +44,7 @@ function findMarkPossibleDuplicateTransactions() {
     Logger.log(`IDs: ${duplicateIds.join(", ")}`);
     Logger.log(`Amount: ${amount}`);
     Logger.log(`Date: ${date}`);
-    Logger.log(`Random number: ${random}`);
+    Logger.log(` test Random number: ${random}`);
   }
 }
 
