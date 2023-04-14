@@ -36,14 +36,14 @@ function searchDuplicates() {
     const searchFrom = document.getElementById("fromaccount").checked;
     const searchTo = document.getElementById("toaccount").checked;
     const searchDescription = document.getElementById("description").checked;
-    //const showDuplicates = document.getElementById("show").checked;
-    //const markDuplicates = document.getElementById("mark").checked;
-    //console.log( startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription, showDuplicates, markDuplicates );
+    const showDuplicates = document.getElementById("show").checked;
+    const markDuplicates = document.getElementById("mark").checked;
+    console.log( startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription, showDuplicates, markDuplicates );
    
     
     google.script.run.withSuccessHandler(returnDuplicateJS)
         .withFailureHandler(showError).withUserObject(this)
-        .findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription );
+        .findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription, showDuplicates, markDuplicates );
 }
     
 function returnDuplicateJS(input){

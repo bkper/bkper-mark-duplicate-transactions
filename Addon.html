@@ -188,7 +188,16 @@
         <input type="checkbox" id="description" name="search-type" value="description">
         <label for="search-description">Description</label>
         
+        <hr>
         
+        <h3>Show or Mark</h3>
+        <input type="radio" id="show" name="mark-or-show" value="show" checked>
+        <label for="show-duplicates">Show duplicates</label>
+        <br>
+        <input type="radio" id="mark" name="mark-or-show" value="mark">
+        <label for="mark-duplicates">Mark duplicates</label>
+        
+        <hr>
         
         <button id="search-button" class="right-align" onclick="searchDuplicates()">Search for duplicates</button>
         <br>

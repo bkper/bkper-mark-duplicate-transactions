@@ -41,7 +41,7 @@ function findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFr
       } else {
         Logger.log("mark the duplicates on the book");
         markPossibleDuplicateTransactions(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription);
-         book.getTransactions("#possibleduplicate").;    
+         book.getTransactions("#possibleduplicate")   
     }
 
     
