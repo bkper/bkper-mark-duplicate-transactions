@@ -1,0 +1,92 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+ $(function() 
+   {
+       initialize();     
+   }
+  );
+
+function initialize(){
+
+    const today = new Date();
+    const formattedToday = today.toISOString().substr(0, 10);
+
+    document.getElementById("end-date").value = formattedToday;
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(today.getDate() - 30);
+    const formattedThirtyDaysAgo = thirtyDaysAgo.toISOString().substr(0, 10);
+    document.getElementById("start-date").value = formattedThirtyDaysAgo;
+
+    const [searchDate, searchAmount, showDuplicates, markDuplicates] = 
+    document.querySelectorAll("#date, #amount, #show, #mark");
+    searchDate.checked = searchAmount.checked = showDuplicates.checked = true;
+    markDuplicates.checked = false;
+    
+
+    //console.log(data.bookName)
+}
+
+
+function searchDuplicates() {
+    const startDate = document.getElementById("start-date").value;
+    const endDate = document.getElementById("end-date").value;
+    const searchDate = document.getElementById("date").checked;
+    const searchAmount = document.getElementById("amount").checked;
+    const searchFrom = document.getElementById("fromaccount").checked;
+    const searchTo = document.getElementById("toaccount").checked;
+    const searchDescription = document.getElementById("description").checked;
+    //const showDuplicates = document.getElementById("show").checked;
+    //const markDuplicates = document.getElementById("mark").checked;
+    //console.log( startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription, showDuplicates, markDuplicates );
+   
+    
+    google.script.run.withSuccessHandler(returnDuplicateJS)
+        .withFailureHandler(showError).withUserObject(this)
+        .findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription );
+}
+    
+function returnDuplicateJS(input){
+  
+
+  console.log(input);
+}
+
+
+
+function removeDuplicateHashtags(){
+    google.script.run.withSuccessHandler(returnRemoveDuplicateHashtagsJS)
+        .withFailureHandler(showError).withUserObject(this)
+        .removeDuplicateHashtagsGS();
+
+
+}
+
+function returnRemoveDuplicateHashtagsJS(input){
+    console.log(input)
+}
+
+
+
+function showError(msg) {
+   var div = $('<div id="error">' +msg + '</div>');
+   
+  setTimeout(function() {
+    $('#error').remove();
+  }, 7000); // auto-dismiss message after 5s.
+  $('#content').after(div);
+}
+
+
+function showCodeWaiting() {
+  document.getElementById('waiting').innerHTML = `<img src='https://storage.googleapis.com/bkper-public/addons/loading_3dots.gif'/>`
+}
+
+function hideCodeWaiting() {
+  document.getElementById('waiting').innerHTML = ``
+}
+function closeDialog() { window.top.close(); }
+
+
+
+</script>  
