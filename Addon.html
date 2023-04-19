@@ -161,8 +161,9 @@
 </head>
 <body>
     <div style="width: 250px;">
-        <h3>Period</h3>
-        <div style="font-weight: bold;"></div>
+        
+        <div style=" margin-top:50px ">
+      <div id="book-name" style="font-weight: 600;margin-bottom: 30px;"> </div>
       <div>
         <label for="start-date">Start Date:</label>
         <input type="date" id="start-date" name="start-date" required>
@@ -171,9 +172,9 @@
         <label for="end-date">End Date:</label>
         <input type="date" id="end-date" name="end-date" required>
       </div>
-        <hr>
+    </div>
         
-        <h3>Search for</h3>
+      <div style=" margin-top:40px" >  
         <input type="checkbox" id="date" name="search-type" value="date">
         <label for="search-date">Date</label>
         <br>
@@ -189,9 +190,12 @@
         <input type="checkbox" id="description" name="search-type" value="description">
         <label for="search-description">Description</label>
         
+        <br>
+        <br>
+        <br>
+    </div> 
         
-        
-        <button id="search-button" class="right-align" onclick="searchDuplicates()">Search for duplicates</button>
+        <button id="search-button" class="right-align" onclick="searchDuplicates()">Mark duplicate transactions</button>
         <br>
         <br>
         <br>
@@ -205,8 +209,10 @@
       <div id="content"> </div>    
   <div class="error"></div>    
   <script>
+
     var data = <?!= JSON.stringify(dataFromServerTemplate) ?>; 
-  </script>
+  
+</script>
 
   
 

@@ -13,10 +13,19 @@ function doGet(e) {
         const book = BkperApp.getBook(bookId);
         
         const bookName = book.getName();
+        setScriptProperty("bookName", bookName)
+        const bookDatePattern = book.getDatePattern();
+        setScriptProperty("bookDatePattern", bookDatePattern)
+        const bookTimeZone = book.getTimeZone();
+        setScriptProperty("bookTimeZone", bookTimeZone)
+        //const bookTimeZoneOffset = book.getTimeZoneOffset();
+        Logger.log(bookDatePattern + " " + bookTimeZone )
         //Logger.log("this book name  "+ bookName);
 
+        var appSettings = getAppSettingsGS();
+
         var htmlTemplate = HtmlService.createTemplateFromFile('Addon');
-        htmlTemplate.dataFromServerTemplate = { bookid: bookId, bookName: bookName };
+        htmlTemplate.dataFromServerTemplate = { bookid: bookId, bookName: bookName, appSettings: appSettings };
         var htmlOutput = htmlTemplate.evaluate().setSandboxMode(HtmlService.SandboxMode.IFRAME)
             .setTitle('Bkper Duplicates');
 
@@ -28,22 +37,26 @@ function doGet(e) {
 
 function findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription ){
     const bookId = getScriptProperty("bookId");
-    //const afterDate =  getFormatedDate(startDate);
-    //const beforeDate = getFormatedDate(endDate);
+    const afterDate =  getFormatedDate(startDate);
+    const beforeDate = getFormatedDate(endDate);
 
     const book = BkperApp.getBook(bookId);
     //const transactions = book.getTransactions("after:".concat(afterDate, " before:").concat(beforeDate))
     //Logger.log(transactions)
-
-
-    if (showDuplicates == true) {
-        Logger.log("show duplicates");
-      } else {
+    setScriptProperty("startDate", startDate);
+    setScriptProperty("endDate", endDate);
+    setScriptProperty("searchDate", searchDate);
+    setScriptProperty("searchAmount", searchAmount);
+    setScriptProperty("searchFrom", searchFrom);
+    setScriptProperty("searchTo", searchTo);
+    setScriptProperty("searchDescription", searchDescription);
+    
+   
         Logger.log("mark the duplicates on the book");
         markPossibleDuplicateTransactions(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription);
-         book.getTransactions("#possibleduplicate")   
-    }
-
+        
+        
+   
     
     
 //    Logger.log("the period is from: " + startDate + " " + afterDate+  " till: "+ endDate +  " " + beforeDate+  " booo " + bookId);
@@ -147,7 +160,7 @@ function removeDuplicateHashtagsGS() {
   const bookId = getScriptProperty("bookId");
   
   const book = BkperApp.getBook(bookId);
-  const transactions = book.getTransactions("after:2000");
+  const transactions = book.getTransactions("#possibleduplicate");
   
   while (transactions.hasNext()) {
     const transaction = transactions.next();
@@ -163,7 +176,24 @@ function removeDuplicateHashtagsGS() {
 }
   
 
-
+function getAppSettingsGS(){
+    const startDate = getScriptProperty("startDate");
+    const endDate = getScriptProperty("endDate");
+    const searchDate = getScriptProperty("searchDate");
+    const searchAmount = getScriptProperty("searchAmount");
+    const searchFrom = getScriptProperty("searchFrom");
+    const searchTo = getScriptProperty("searchTo");
+    const searchDescription = getScriptProperty("searchDescription");
+    Logger.log("getappsettingsgs searchfrom " + searchFrom)
+    if ( startDate === null &&  endDate === null && searchDate === null && searchAmount === null && searchFrom === null && searchTo === null && searchDescription === null ) 
+    {
+        var appSettings = false;
+    } else {
+        var  appSettings = true;
+    }
+var returnObject = { appSettings: appSettings,startDate: startDate,endDate:endDate,searchDate:searchDate,searchAmount :searchAmount,searchFrom:searchFrom,searchTo :searchTo,searchDescription: searchDescription} 
+return returnObject
+}
 
 
 function setScriptProperty(propertyKey, propertyValue) {
@@ -179,7 +209,8 @@ function getScriptProperty(propertyKey) {
 }  
 
 function getFormatedDate(inputDate){    
-  return  Utilities.formatDate(new Date(inputDate), Session.getScriptTimeZone(), 'dd/MM/yyyy');  
+  const bookDatePattern =  getScriptProperty("bookDatePattern")
+  return  Utilities.formatDate(new Date(inputDate), Session.getScriptTimeZone(), bookDatePattern);  
 }
 
 
@@ -198,61 +229,7 @@ function test(){
     const searchFrom= false ;
     const searchTo=  false ;
     const searchDescription= true ;
-    const showDuplicates= true ;
-    const markDuplicates= false;
     
-    markPossibleDuplicateTransactions(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription, showDuplicates, markDuplicates );
+    markPossibleDuplicateTransactions(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription );
 
 }
-
-
-
-/*
-function findMarkPossibleDuplicateTransactions() {
-    var bookId = "agtzfmJrcGVyLWhyZHITCxIGTGVkZ2VyGICAoKmn77EJDA"; // Replace with the ID of your Bkper book
-    var book = BkperApp.getBook(bookId);
-    var afterDate = "01/01/2023"; // Replace with your desired start date
-    var beforeDate = "01/01/2024"; // Replace with your desired end date
-    var transactions = book.getTransactions("after:".concat(afterDate, " before:").concat(beforeDate));
-    var uniqueIdentifiers = {};
-    var duplicates = {};
-    while (transactions.hasNext()) {
-        var transaction = transactions.next();
-        var identifier = "".concat(transaction.getAmount(), "-").concat(transaction.getDate()); // Use amount and date to identify duplicates
-        var description = transaction.getDescription();
-        // Check if this transaction is a possible duplicate and has not already been marked
-        if (uniqueIdentifiers[identifier] && description.indexOf("#possibleduplicate") === -1) {
-            if (duplicates[identifier]) {
-                duplicates[identifier].push(transaction.getId());
-            }
-            else {
-                duplicates[identifier] = [uniqueIdentifiers[identifier], transaction.getId()];
-            }
-        }
-        else {
-            uniqueIdentifiers[identifier] = transaction.getId();
-        }
-    }
-    for (var identifier in duplicates) {
-        var duplicateIds = duplicates[identifier];
-        var random = Math.floor(Math.random() * 10000000000);
-        for (var i = 0; i < duplicateIds.length; i++) {
-            var tx = book.getTransaction(duplicateIds[i]);
-            var description = tx.getDescription();
-            if (description.indexOf("#possibleduplicate") === -1) {
-                description += " #possibleduplicate #".concat(random);
-                tx.setDescription(description);
-                tx.update();
-            }
-        }
-        var tx1 = book.getTransaction(duplicateIds[0]);
-        var amount = tx1.getAmount();
-        var date = tx1.getDate();
-        Logger.log("Duplicate transactions found:");
-        Logger.log("IDs: ".concat(duplicateIds.join(", ")));
-        Logger.log("Amount: ".concat(amount));
-        Logger.log("Date: ".concat(date));
-        Logger.log(" test Random number: ".concat(random));
-    }
-}
-*/

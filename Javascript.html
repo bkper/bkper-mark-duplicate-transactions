@@ -1,3 +1,5 @@
+
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <script>
@@ -9,6 +11,11 @@
 
 function initialize(){
 
+    const bookName = document.getElementById("book-name");
+    bookName.innerHTML = data.bookName;
+
+    if (data.appSettings.appSettings === false){
+    // default app settings     
     const today = new Date();
     const formattedToday = today.toISOString().substr(0, 10);
 
@@ -18,14 +25,32 @@ function initialize(){
     const formattedThirtyDaysAgo = thirtyDaysAgo.toISOString().substr(0, 10);
     document.getElementById("start-date").value = formattedThirtyDaysAgo;
 
-    const [searchDate, searchAmount, showDuplicates, markDuplicates] = 
-    document.querySelectorAll("#date, #amount, #show, #mark");
-    searchDate.checked = searchAmount.checked = showDuplicates.checked = true;
-    markDuplicates.checked = false;
-    
+    const [searchDate, searchAmount] = 
+    document.querySelectorAll("#date, #amount");
+    searchDate.checked = true;
+    searchAmount.checked  = true;
+    } else {
+        // last search conditions
+        document.getElementById("start-date").value = data.appSettings.startDate;
+        document.getElementById("end-date").value = data.appSettings.endDate;
+        if (data.appSettings.searchDate === "true" ){document.getElementById("date").checked = true} 
+        if (data.appSettings.searchDate === "false" ){document.getElementById("date").checked = false}
+        if (data.appSettings.searchAmount== "true" ){document.getElementById("amount").checked = true} 
+        if (data.appSettings.searchAmount== "false" ) {document.getElementById("amount").checked =false}
+        if (data.appSettings.searchFrom=== "true" ){document.getElementById("fromaccount").checked = true} 
+        if (data.appSettings.searchFrom=== "false" ) {document.getElementById("fromaccount").checked =false}
+        if (data.appSettings.searchTo=== "true"  ){ document.getElementById("toaccount").checked = true}
+        if (data.appSettings.searchTo=== "false" ) {document.getElementById("toaccount").checked = false}
+        if (data.appSettings.searchDescription=== "true"  ){ document.getElementById("description").checked = true}
+        if (data.appSettings.searchDescription=== "false" ){document.getElementById("description").checked = false}
+      
 
-    //console.log(data.bookName)
+    }
+    
+    console.log(data.appSettings.appSettings)
 }
+
+
 
 
 function searchDuplicates() {
@@ -36,19 +61,17 @@ function searchDuplicates() {
     const searchFrom = document.getElementById("fromaccount").checked;
     const searchTo = document.getElementById("toaccount").checked;
     const searchDescription = document.getElementById("description").checked;
-    const showDuplicates = document.getElementById("show").checked;
-    const markDuplicates = document.getElementById("mark").checked;
-    console.log( startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription, showDuplicates, markDuplicates );
+    //const showDuplicates = document.getElementById("show").checked;
+    //const markDuplicates = document.getElementById("mark").checked;
+    //console.log( startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription, showDuplicates, markDuplicates );
    
     
     google.script.run.withSuccessHandler(returnDuplicateJS)
         .withFailureHandler(showError).withUserObject(this)
-        .findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription, showDuplicates, markDuplicates );
+        .findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription );
 }
     
 function returnDuplicateJS(input){
-  
-
   console.log(input);
 }
 
@@ -87,6 +110,26 @@ function hideCodeWaiting() {
 }
 function closeDialog() { window.top.close(); }
 
+//  test
 
+function getAppSettings() {
+    google.script.run.withSuccessHandler(returnAppSettingsJS)
+        .withFailureHandler(showError).withUserObject(this)
+        .getAppSettingsGS();
+}
+
+function returnAppSettingsJS(object){
+    const startDate = object.startDate
+    const endDate =  object.endDate;
+    const searchDate =  object.searchDate;
+    const searchAmount =  object.searchAmount;
+    const searchFrom =  object.searchFrom;
+    const searchTo =  object.searchTo;
+    const searchDescription = object.searchDescription;
+    const appSettings =object.appSettings;
+
+    console.log("apsettings: " + appSettings)
+
+}
 
 </script>  
