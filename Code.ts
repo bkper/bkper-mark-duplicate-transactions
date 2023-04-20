@@ -8,16 +8,16 @@ function doGet(e) {
     } else {
         
         var bookId = e.parameter.bookId;
-        setScriptProperty("bookId", bookId) 
+        setUserProperty("bookId", bookId) 
         
         const book = BkperApp.getBook(bookId);
         
         const bookName = book.getName();
-        setScriptProperty("bookName", bookName)
+        setUserProperty("bookName", bookName)
         const bookDatePattern = book.getDatePattern();
-        setScriptProperty("bookDatePattern", bookDatePattern)
+        setUserProperty("bookDatePattern", bookDatePattern)
         const bookTimeZone = book.getTimeZone();
-        setScriptProperty("bookTimeZone", bookTimeZone)
+        setUserProperty("bookTimeZone", bookTimeZone)
         //const bookTimeZoneOffset = book.getTimeZoneOffset();
         Logger.log(bookDatePattern + " " + bookTimeZone )
         //Logger.log("this book name  "+ bookName);
@@ -36,30 +36,24 @@ function doGet(e) {
 }
 
 function findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription ){
-    const bookId = getScriptProperty("bookId");
+    const bookId = getUserProperty("bookId");
     const afterDate =  getFormatedDate(startDate);
     const beforeDate = getFormatedDate(endDate);
 
     const book = BkperApp.getBook(bookId);
     //const transactions = book.getTransactions("after:".concat(afterDate, " before:").concat(beforeDate))
     //Logger.log(transactions)
-    setScriptProperty("startDate", startDate);
-    setScriptProperty("endDate", endDate);
-    setScriptProperty("searchDate", searchDate);
-    setScriptProperty("searchAmount", searchAmount);
-    setScriptProperty("searchFrom", searchFrom);
-    setScriptProperty("searchTo", searchTo);
-    setScriptProperty("searchDescription", searchDescription);
+    setUserProperty("startDate", startDate);
+    setUserProperty("endDate", endDate);
+    setUserProperty("searchDate", searchDate);
+    setUserProperty("searchAmount", searchAmount);
+    setUserProperty("searchFrom", searchFrom);
+    setUserProperty("searchTo", searchTo);
+    setUserProperty("searchDescription", searchDescription);
     
    
         Logger.log("mark the duplicates on the book");
         markPossibleDuplicateTransactions(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription);
-        
-        
-   
-    
-    
-//    Logger.log("the period is from: " + startDate + " " + afterDate+  " till: "+ endDate +  " " + beforeDate+  " booo " + bookId);
 
     return  "made the turn"
 }
@@ -77,7 +71,7 @@ function markPossibleDuplicateTransactions(startDate, endDate, searchDate, searc
     const beforeDate = getFormatedDate(endDate);
   
     Logger.log( "in " + afterDate + " " + beforeDate)
-    const bookId = getScriptProperty("bookId");
+    const bookId = getUserProperty("bookId");
     const book = BkperApp.getBook(bookId);
     const transactions = book.getTransactions("after: "+ afterDate + " before: " + beforeDate)
   
@@ -157,7 +151,7 @@ function markPossibleDuplicateTransactions(startDate, endDate, searchDate, searc
 
   
 function removeDuplicateHashtagsGS() {
-  const bookId = getScriptProperty("bookId");
+  const bookId = getUserProperty("bookId");
   
   const book = BkperApp.getBook(bookId);
   const transactions = book.getTransactions("#possibleduplicate");
@@ -177,13 +171,13 @@ function removeDuplicateHashtagsGS() {
   
 
 function getAppSettingsGS(){
-    const startDate = getScriptProperty("startDate");
-    const endDate = getScriptProperty("endDate");
-    const searchDate = getScriptProperty("searchDate");
-    const searchAmount = getScriptProperty("searchAmount");
-    const searchFrom = getScriptProperty("searchFrom");
-    const searchTo = getScriptProperty("searchTo");
-    const searchDescription = getScriptProperty("searchDescription");
+    const startDate = getUserProperty("startDate");
+    const endDate = getUserProperty("endDate");
+    const searchDate = getUserProperty("searchDate");
+    const searchAmount = getUserProperty("searchAmount");
+    const searchFrom = getUserProperty("searchFrom");
+    const searchTo = getUserProperty("searchTo");
+    const searchDescription = getUserProperty("searchDescription");
     Logger.log("getappsettingsgs searchfrom " + searchFrom)
     if ( startDate === null &&  endDate === null && searchDate === null && searchAmount === null && searchFrom === null && searchTo === null && searchDescription === null ) 
     {
@@ -196,40 +190,23 @@ return returnObject
 }
 
 
-function setScriptProperty(propertyKey, propertyValue) {
-    var scriptProperties = PropertiesService.getScriptProperties();
-    scriptProperties.setProperty(propertyKey, propertyValue);
+function setUserProperty(propertyKey, propertyValue) {
+    var userProperties = PropertiesService.getUserProperties();
+    userProperties.setProperty(propertyKey, propertyValue);
     return 
 }
 
-function getScriptProperty(propertyKey) {
-    var scriptProperties = PropertiesService.getScriptProperties();
-    var propertyValue = scriptProperties.getProperty(propertyKey);
+function getUserProperty(propertyKey) {
+    var userProperties = PropertiesService.getUserProperties();
+    var propertyValue = userProperties.getProperty(propertyKey);
     return propertyValue
 }  
 
 function getFormatedDate(inputDate){    
-  const bookDatePattern =  getScriptProperty("bookDatePattern")
+  const bookDatePattern =  getUserProperty("bookDatePattern")
   return  Utilities.formatDate(new Date(inputDate), Session.getScriptTimeZone(), bookDatePattern);  
 }
 
 
 
-/*----------- 
-//
-//testing area 
-//
-*/
 
-function test(){
-    const startDate = "2023-01-14"; 
-    const endDate ="2024-04-13";
-    const searchDate= true ;
-    const searchAmount= false ;
-    const searchFrom= false ;
-    const searchTo=  false ;
-    const searchDescription= true ;
-    
-    markPossibleDuplicateTransactions(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription );
-
-}

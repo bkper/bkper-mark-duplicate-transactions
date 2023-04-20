@@ -60,11 +60,7 @@ function searchDuplicates() {
     const searchAmount = document.getElementById("amount").checked;
     const searchFrom = document.getElementById("fromaccount").checked;
     const searchTo = document.getElementById("toaccount").checked;
-    const searchDescription = document.getElementById("description").checked;
-    //const showDuplicates = document.getElementById("show").checked;
-    //const markDuplicates = document.getElementById("mark").checked;
-    //console.log( startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription, showDuplicates, markDuplicates );
-   
+    const searchDescription = document.getElementById("description").checked;  
     
     google.script.run.withSuccessHandler(returnDuplicateJS)
         .withFailureHandler(showError).withUserObject(this)
@@ -81,22 +77,18 @@ function removeDuplicateHashtags(){
     google.script.run.withSuccessHandler(returnRemoveDuplicateHashtagsJS)
         .withFailureHandler(showError).withUserObject(this)
         .removeDuplicateHashtagsGS();
-
-
 }
 
 function returnRemoveDuplicateHashtagsJS(input){
     console.log(input)
 }
 
-
-
 function showError(msg) {
    var div = $('<div id="error">' +msg + '</div>');
    
   setTimeout(function() {
     $('#error').remove();
-  }, 7000); // auto-dismiss message after 5s.
+  }, 11000); // auto-dismiss message after 5s.
   $('#content').after(div);
 }
 
@@ -108,6 +100,7 @@ function showCodeWaiting() {
 function hideCodeWaiting() {
   document.getElementById('waiting').innerHTML = ``
 }
+
 function closeDialog() { window.top.close(); }
 
 //  test
