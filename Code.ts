@@ -14,13 +14,15 @@ function doGet(e) {
         
         const bookName = book.getName();
         setUserProperty("bookName", bookName)
+        
         const bookDatePattern = book.getDatePattern();
         setUserProperty("bookDatePattern", bookDatePattern)
+        
         const bookTimeZone = book.getTimeZone();
         setUserProperty("bookTimeZone", bookTimeZone)
-        //const bookTimeZoneOffset = book.getTimeZoneOffset();
+       
         Logger.log(bookDatePattern + " " + bookTimeZone )
-        //Logger.log("this book name  "+ bookName);
+        
 
         var appSettings = getAppSettingsGS();
 
