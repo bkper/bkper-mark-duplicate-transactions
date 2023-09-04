@@ -27,13 +27,22 @@ function doGet(e) {
         return htmlOutput;
     }
 }
-function findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription) {
-    var bookId = getUserProperty("bookId");
+ 
+
+function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription) {
     var afterDate = getFormatedDate(startDate);
     var beforeDate = getFormatedDate(endDate);
+    //Logger.log("in " + afterDate + " " + beforeDate);
+    var bookId = getUserProperty("bookId");
     var book = BkperApp.getBook(bookId);
-    //const transactions = book.getTransactions("after:".concat(afterDate, " before:").concat(beforeDate))
-    //Logger.log(transactions)
+    var permission = book.getPermission()
+   
+    if (!(permission === "OWNER" || permission === "EDITOR")) {
+        // Exit the code if it's not OWNER or EDITOR
+        return "You do not have enough permission to mark Duplicates";
+      }
+    
+
     setUserProperty("startDate", startDate);
     setUserProperty("endDate", endDate);
     setUserProperty("searchDate", searchDate);
@@ -41,17 +50,10 @@ function findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFr
     setUserProperty("searchFrom", searchFrom);
     setUserProperty("searchTo", searchTo);
     setUserProperty("searchDescription", searchDescription);
-    Logger.log("mark the duplicates on the book");
-    markPossibleDuplicateTransactions(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription);
-    return "made the turn";
-}
-function markPossibleDuplicateTransactions(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription) {
-    var afterDate = getFormatedDate(startDate);
-    var beforeDate = getFormatedDate(endDate);
-    Logger.log("in " + afterDate + " " + beforeDate);
-    var bookId = getUserProperty("bookId");
-    var book = BkperApp.getBook(bookId);
+    Logger.log("book get transactions a");
+
     var transactions = book.getTransactions("after: " + afterDate + " before: " + beforeDate);
+    Logger.log("book get transactions b");
     var uniqueIdentifiers = {};
     var duplicates = {};
     while (transactions.hasNext()) {
@@ -94,10 +96,15 @@ function markPossibleDuplicateTransactions(startDate, endDate, searchDate, searc
         for (var i = 0; i < duplicateIds.length; i++) {
             var tx = book.getTransaction(duplicateIds[i]);
             var description = tx.getDescription();
+
+            Logger.log( "testing record only " + description)
             if (description.indexOf("#possibleduplicate") === -1) {
                 description += " #possibleduplicate #dup_".concat(random);
                 tx.setDescription(description);
+                Logger.log("Im here")
+
                 tx.update();
+                
             }
         }
         var tx1 = book.getTransaction(duplicateIds[0]);
@@ -109,11 +116,18 @@ function markPossibleDuplicateTransactions(startDate, endDate, searchDate, searc
         Logger.log("Date: ".concat(date));
         Logger.log(" test Random number: ".concat(random));
     }
-    return;
+    return "Duplicates Marked";
 }
 function removeDuplicateHashtagsGS() {
     var bookId = getUserProperty("bookId");
     var book = BkperApp.getBook(bookId);
+    var permission = book.getPermission()
+   
+    if (!(permission === "OWNER" || permission === "EDITOR")) {
+        // Exit the code if it's not OWNER or EDITOR
+        return "You do not have enough permission to remove Duplicate hashtags ";
+      }
+
     var transactions = book.getTransactions("#possibleduplicate");
     while (transactions.hasNext()) {
         var transaction = transactions.next();

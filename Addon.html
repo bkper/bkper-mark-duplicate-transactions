@@ -139,23 +139,24 @@
     }
     
     #waiting {
-            margin-top: 50px;
-            margin-left:20px;
+            margin-top: 120px;
+            margin-left:90px;
           }
     
     #waiting img {
             height: 12px;
-            left: 50%;
-            margin-top: -5px;
-            margin-left: -6px;
-            position: absolute;
-            top: 50%;
+            
           }
 
     .right-align {
         float: right;
         margin-right: 18px;
     }      
+
+    #error {
+      font-size: 1.3em; 
+      color: orangered;
+    }
 
     #closeBtn {
         position: absolute
@@ -208,19 +209,21 @@
         <br>
     </div> 
         
-        <button id="search-button" class="right-align" onclick="searchDuplicates()">Mark duplicate transactions</button>
+        <button id="set-markers-button" class="right-align" onclick="showCodeWaiting(),markDuplicates()">Mark duplicate transactions</button>
         <br>
         <br>
         <br>
         <hr>
         
         <h3>Clean up</h3>
-        <button id="remove-markers-button" class="right-align" onclick="removeDuplicateHashtags()">Remove Duplicate Hashtags</button>
+        <button id="remove-markers-button" class="right-align" onclick="showCodeWaiting();removeDuplicateHashtags()">Remove Duplicate Hashtags</button>
 
       </div>
 
-      <div id="content"> </div>    
-  <div class="error" style="margin-top:30px"></div>    
+      <div id="content" style="margin-top:70px"> </div>
+      <div id="success" style="margin-top:70px"> </div>    
+      <div class="error" style="margin-top:70px"></div>    
+      <div id="waiting" ></div>   
   <script>
 
     var data = <?!= JSON.stringify(dataFromServerTemplate) ?>; 

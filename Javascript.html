@@ -53,7 +53,9 @@ function initialize(){
 
 
 
-function searchDuplicates() {
+function markDuplicates() {
+  $('#set-markers-button').prop('disabled', true);
+  $('#remove-markers-button').prop('disabled', true);
     const startDate = document.getElementById("start-date").value;
     const endDate = document.getElementById("end-date").value;
     const searchDate = document.getElementById("date").checked;
@@ -62,28 +64,51 @@ function searchDuplicates() {
     const searchTo = document.getElementById("toaccount").checked;
     const searchDescription = document.getElementById("description").checked;  
     
-    google.script.run.withSuccessHandler(returnDuplicateJS)
+    google.script.run.withSuccessHandler(duplicateMarkedJS)
         .withFailureHandler(showError).withUserObject(this)
-        .findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription );
+        .markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription );
+        //.findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription );
 }
     
-function returnDuplicateJS(input){
-  console.log(input);
+function duplicateMarkedJS(msg){
+  hideCodeWaiting();
+  $('#set-markers-button').prop('disabled', false);
+  $('#remove-markers-button').prop('disabled', false);
+  var div = $('<div id="success">' +msg + '</div>');
+  setTimeout(function() {
+    $('#success').remove();
+  }, 11000); // auto-dismiss message after 5s.
+  $('#content').after(div);
+  console.log(msg);
 }
 
 
 
 function removeDuplicateHashtags(){
+  $('#set-markers-button').prop('disabled', true);
+  $('#remove-markers-button').prop('disabled', true);
     google.script.run.withSuccessHandler(returnRemoveDuplicateHashtagsJS)
         .withFailureHandler(showError).withUserObject(this)
         .removeDuplicateHashtagsGS();
 }
 
-function returnRemoveDuplicateHashtagsJS(input){
-    console.log(input)
+function returnRemoveDuplicateHashtagsJS(msg){
+    hideCodeWaiting();
+    $('#set-markers-button').prop('disabled', false);
+  $('#remove-markers-button').prop('disabled', false);
+  var div = $('<div id="success">' +msg + '</div>');
+  setTimeout(function() {
+    $('#success').remove();
+  }, 11000); // auto-dismiss message after 5s.
+  $('#content').after(div);
+  console.log(msg);
 }
 
 function showError(msg) {
+  hideCodeWaiting()
+  $('#set-markers-button').prop('disabled', false);
+  $('#remove-markers-button').prop('disabled', false);
+  
    var div = $('<div id="error">' +msg + '</div>');
    
   setTimeout(function() {
@@ -94,11 +119,14 @@ function showError(msg) {
 
 
 function showCodeWaiting() {
-  document.getElementById('waiting').innerHTML = `<img src='https://storage.googleapis.com/bkper-public/addons/loading_3dots.gif'/>`
+  console.log("show")
+  $('#waiting').html("<img src='https://storage.googleapis.com/bkper-public/addons/loading_3dots.gif'/>")
 }
 
 function hideCodeWaiting() {
-  document.getElementById('waiting').innerHTML = ``
+  console.log("hide")
+  $('#waiting').html('')
+  
 }
 
 function closeDialog() { window.top.close(); }
