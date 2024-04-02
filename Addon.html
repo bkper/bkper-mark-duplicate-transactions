@@ -1,178 +1,30 @@
 
 <!DOCTYPE html>
-<html>
+<html    class="${isDarkTheme ? 'sl-theme-dark' : ''}">
 <head>
-  <title>Add-on duplicates</title>
-  <style>
-    html, body { height:100%;}
-    body {
-      color: #222;
-      font: 13px/18px arial, sans-serif;
-      margin-left:20px
-    }
-    h1,h2,h3,h4,h5,h6 {
-      color: #000;
-     font: 16px/24px arial, sans-serif normal;
-    }
-
-    a {
-      color: #15c;
-      cursor: pointer;
-      text-decoration: none;
-    }
-    
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .button,
-    button,
-    input[type="button"],
-    input[type="image"],
-    input[type="reset"],
-    input[type="submit"] {
-      background: -moz-linear-gradient(top, #f5f5f5, #f1f1f1);
-      background: -ms-linear-gradient(top, #f5f5f5, #f1f1f1);
-      background: -o-linear-gradient(top, #f5f5f5, #f1f1f1);
-      background: -webkit-linear-gradient(top, #f5f5f5, #f1f1f1);
-      background: linear-gradient(top, #f5f5f5, #f1f1f1);
-      border: 1px solid #dcdcdc;
-      -moz-border-radius: 2px;
-      -webkit-border-radius: 2px;
-      border-radius: 2px;
-      -moz-box-shadow: none;
-      -webkit-box-shadow: none;
-      box-shadow: none;
-      color: #333;
-      cursor: default;
-      font-family: arial, sans-serif;
-      font-size: 11px;
-      font-weight: bold;
-      height: 29px;
-      line-height: 27px;
-      margin: 0;
-      min-width: 72px;
-      outline: 0;
-      padding: 0 8px;
-      text-align: center;
-      white-space: nowrap;
-    }
-    
-    .button {
-      box-sizing: border-box;
-      display: inline-block;
-      padding: 0;
-    }
-
-    .button:hover,
-    button:hover,
-    input[type="button"]:hover,
-    input[type="image"]:hover,
-    input[type="reset"]:hover,
-    input[type="submit"]:hover {
-      background: -moz-linear-gradient(top, #f8f8f8, #f1f1f1);
-      background: -ms-linear-gradient(top, #f8f8f8, #f1f1f1);
-      background: -o-linear-gradient(top, #f8f8f8, #f1f1f1);
-      background: -webkit-linear-gradient(top, #f8f8f8, #f1f1f1);
-      background: linear-gradient(top, #f8f8f8, #f1f1f1);
-      border: 1px solid #c6c6c6;
-      color: #111;
-      text-decoration: none;
-    }
-    .button:focus,
-    button:focus,
-    input[type="button"]:focus,
-    input[type="image"]:focus,
-    input[type="reset"]:focus,
-    input[type="submit"]:focus {
-      -moz-box-shadow: inset 0 0 0 1px #fff;
-      -webkit-box-shadow: inset 0 0 0 1px #fff;
-      box-shadow: inset 0 0 0 1px #fff;
-    }
-    .button:active,
-    button:active,
-    input[type="button"]:active,
-    input[type="submit"]:active {
-      background: -moz-linear-gradient(top, #f8f8f8, #f1f1f1);
-      background: -ms-linear-gradient(top, #f8f8f8, #f1f1f1);
-      background: -o-linear-gradient(top, #f8f8f8, #f1f1f1);
-      background: -webkit-linear-gradient(top, #f8f8f8, #f1f1f1);
-      background: linear-gradient(top, #f8f8f8, #f1f1f1);
-      border: 1px solid #ccc;
-      -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-      -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-      color: #111;
-    }
-    button:disabled,
-    input[type="button"]:disabled,
-    input[type="image"]:disabled,
-    input[type="reset"]:disabled,
-    input[type="submit"]:disabled {
-      background: #fff;
-      border: 1px solid #dcdcdc;
-      -moz-box-shadow: none;
-      -webkit-box-shadow: none;
-      box-shadow: none;
-      color: #333;
-      opacity: .5;
-    }
-    .button + .button,
-    button + button,
-    input + input {
-      margin-left: 12px;
-    }
-
-    .logo{
-      height:50px;
-      margin-left: 20px;
-      margin-bottom: 20px;
-    }
-    
-    th, td {
-      border-bottom: 1px solid #ddd;
-    }
-
-    hr{
-        margin-top: 16px; 
-        margin-bottom: 12px
-    }
-    
-    #waiting {
-            margin-top: 120px;
-            margin-left:90px;
-          }
-    
-    #waiting img {
-            height: 12px;
-            
-          }
-
-    .right-align {
-        float: right;
-        margin-right: 18px;
-    }      
-
-    #error {
-      font-size: 1.3em; 
-      color: orangered;
-    }
-
-    #closeBtn {
-        position: absolute
-        ; top: 0
-        ; right: 0
-        ; margin-top:30px
-        ; width: 30px
-        ; height: 30px;
-        ; color: grey
-        ; font-weight: 600;
-    }
-  </style>
+  <title>Bkper Duplicates</title>
+  
+   
 
 
 </head>
 <body>
+  <sl-progress-bar indeterminate></sl-progress-bar>
+  <br>
+  <div id="book-name" style="font-weight: 600;margin-bottom: 30px;"> </div>
+  <br>
+  Start Date: <sl-input type="date" placeholder="Date"></sl-input>
+  <br>
+  End Date: <sl-input type="date" placeholder="Date"></sl-input>
+  <br>
+  <br>
+  <sl-checkbox>Date</sl-checkbox><br>
+  <sl-checkbox>Amount</sl-checkbox><br>
+  <sl-checkbox>From</sl-checkbox><br>
+  <sl-checkbox>To</sl-checkbox><br>
+  <sl-checkbox>Description</sl-checkbox><br>
+  <br>
+  <br>
     <div style="width: 250px;">
         <div id="closeBtn" onclick="closeDialog()">X</div>
         
@@ -224,6 +76,8 @@
       <div id="success" style="margin-top:70px"> </div>    
       <div class="error" style="margin-top:70px"></div>    
       <div id="waiting" ></div>   
+
+      <sl-button toggle bind:checked="isDarkTheme"><sl-icon name="circle-half"></sl-icon></sl-button>
   <script>
 
     var data = <?!= JSON.stringify(dataFromServerTemplate) ?>; 
@@ -235,3 +89,4 @@
 </body>
 </html>
 <?!= HtmlService.createHtmlOutputFromFile('Javascript').getContent(); ?>
+<?!= HtmlService.createHtmlOutputFromFile('Style').getContent(); ?>

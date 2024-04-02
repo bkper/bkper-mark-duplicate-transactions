@@ -1,5 +1,6 @@
 // Compiled using bkper-mark-duplicate-transactions 1.0.0 (TypeScript 4.9.5)
 // Compiled using bkper-mark-duplicate-transactions 1.0.0 (TypeScript 4.9.5)
+// Compiled using bkper-mark-duplicate-transactions 1.0.0 (TypeScript 4.9.5)
 // 
 function doGet(e) {
     if (!e || !e.parameter || !e.parameter.bookId) {
@@ -27,22 +28,17 @@ function doGet(e) {
         return htmlOutput;
     }
 }
- 
-
 function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription) {
     var afterDate = getFormatedDate(startDate);
     var beforeDate = getFormatedDate(endDate);
     //Logger.log("in " + afterDate + " " + beforeDate);
     var bookId = getUserProperty("bookId");
     var book = BkperApp.getBook(bookId);
-    var permission = book.getPermission()
-   
+    var permission = book.getPermission();
     if (!(permission === "OWNER" || permission === "EDITOR")) {
         // Exit the code if it's not OWNER or EDITOR
         return "You do not have enough permission to mark Duplicates";
-      }
-    
-
+    }
     setUserProperty("startDate", startDate);
     setUserProperty("endDate", endDate);
     setUserProperty("searchDate", searchDate);
@@ -51,7 +47,6 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
     setUserProperty("searchTo", searchTo);
     setUserProperty("searchDescription", searchDescription);
     Logger.log("book get transactions a");
-
     var transactions = book.getTransactions("after: " + afterDate + " before: " + beforeDate);
     Logger.log("book get transactions b");
     var uniqueIdentifiers = {};
@@ -96,15 +91,12 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
         for (var i = 0; i < duplicateIds.length; i++) {
             var tx = book.getTransaction(duplicateIds[i]);
             var description = tx.getDescription();
-
-            Logger.log( "testing record only " + description)
+            Logger.log("testing record only " + description);
             if (description.indexOf("#possibleduplicate") === -1) {
                 description += " #possibleduplicate #dup_".concat(random);
                 tx.setDescription(description);
-                Logger.log("Im here")
-
+                Logger.log("Im here");
                 tx.update();
-                
             }
         }
         var tx1 = book.getTransaction(duplicateIds[0]);
@@ -121,13 +113,11 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
 function removeDuplicateHashtagsGS() {
     var bookId = getUserProperty("bookId");
     var book = BkperApp.getBook(bookId);
-    var permission = book.getPermission()
-   
+    var permission = book.getPermission();
     if (!(permission === "OWNER" || permission === "EDITOR")) {
         // Exit the code if it's not OWNER or EDITOR
         return "You do not have enough permission to remove Duplicate hashtags ";
-      }
-
+    }
     var transactions = book.getTransactions("#possibleduplicate");
     while (transactions.hasNext()) {
         var transaction = transactions.next();

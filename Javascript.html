@@ -1,13 +1,22 @@
-
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
 
 <script>
- $(function() 
-   {
-       initialize();     
-   }
-  );
+
+document.addEventListener('DOMContentLoaded', () => {
+  initialize();
+});
+ 
+
+let isDarkTheme = false;
+
+// Function to toggle theme
+const toggleTheme = () => {
+  isDarkTheme = !isDarkTheme;
+  document.documentElement.classList.toggle('sl-theme-dark');
+};
+
+// Connect the button to the function
+document.querySelector('sl-button[toggle]').addEventListener('click', toggleTheme);
 
 function initialize(){
 
@@ -129,7 +138,7 @@ function hideCodeWaiting() {
   
 }
 
-function closeDialog() { window.top.close(); }
+//function closeDialog() { window.top.close(); }
 
 //  test
 
