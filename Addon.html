@@ -2,82 +2,70 @@
 <!DOCTYPE html>
 <html    class="${isDarkTheme ? 'sl-theme-dark' : ''}">
 <head>
-  <title>Bkper Duplicates</title>
-  
-   
-
-
+<title>Bkper Duplicates</title>
 </head>
+
 <body>
-  <sl-progress-bar indeterminate></sl-progress-bar>
-  <br>
-  <div id="book-name" style="font-weight: 600;margin-bottom: 30px;"> </div>
-  <br>
-  Start Date: <sl-input type="date" placeholder="Date"></sl-input>
-  <br>
-  End Date: <sl-input type="date" placeholder="Date"></sl-input>
+  <header class="header">
+    <h1 class="header__title">Duplicate Transactions</h1> 
+  </header>
+  <sl-progress-bar id="progresssBar" style="--height: 4px;" indeterminate></sl-progress-bar>
   <br>
   <br>
-  <sl-checkbox>Date</sl-checkbox><br>
-  <sl-checkbox>Amount</sl-checkbox><br>
-  <sl-checkbox>From</sl-checkbox><br>
-  <sl-checkbox>To</sl-checkbox><br>
-  <sl-checkbox>Description</sl-checkbox><br>
-  <br>
-  <br>
-    <div style="width: 250px;">
-        <div id="closeBtn" onclick="closeDialog()">X</div>
-        
-        <div style=" margin-top:50px ">
-      <div id="book-name" style="font-weight: 600;margin-bottom: 30px;"> </div>
-      <div>
-        <label for="start-date">Start Date:</label>
-        <input type="date" id="start-date" name="start-date" required>
-      </div><br>
-      <div>
-        <label for="end-date">End Date:</label>
-        <input type="date" id="end-date" name="end-date" required>
-      </div>
+  <div class="main"> 
+     <div class="book__card">
+        <div id="book-name" class="book__name"> </div>
+     </div>
+     
+     <div class="task__card">
+           <H2 class="task__title"> Mark Duplicates</H2>
+    
+        <br>
+        Start Date: <sl-input type="date" placeholder="Date" id="start-date" ></sl-input>
+        <br>
+       End Date: <sl-input type="date" placeholder="Date" id="end-date"></sl-input>
+       <br>
+       <br>
+      <sl-checkbox id="date">Date</sl-checkbox><br>
+      <sl-checkbox id="amount">Amount</sl-checkbox><br>
+      <sl-checkbox id="fromaccount">From</sl-checkbox><br>
+      <sl-checkbox id="toaccount">To</sl-checkbox><br>
+      <sl-checkbox id="description">Description</sl-checkbox><br>
+      <br>
+      <br>
+      <sl-button id="set-markers-button" onclick="showProgressBar(),markDuplicates()">Mark</sl-button>
+      <br>
     </div>
-        
-      <div style=" margin-top:40px" >  
-        <input type="checkbox" id="date" name="search-type" value="date">
-        <label for="search-date">Date</label>
-        <br>
-        <input type="checkbox" id="amount" name="search-type" value="amount">
-        <label for="search-amount">Amount</label>
-        <br>
-        <input type="checkbox" id="fromaccount" name="search-type" value="from">
-        <label for="search-from">From</label>
-        <br>
-        <input type="checkbox" id="toaccount" name="search-type" value="to">
-        <label for="search-to">To</label>
-        <br>
-        <input type="checkbox" id="description" name="search-type" value="description">
-        <label for="search-description">Description</label>
-        
-        <br>
-        <br>
-        <br>
-    </div> 
-        
-        <button id="set-markers-button" class="right-align" onclick="showCodeWaiting(),markDuplicates()">Mark duplicate transactions</button>
-        <br>
-        <br>
-        <br>
-        <hr>
-        
-        <h3>Clean up</h3>
-        <button id="remove-markers-button" class="right-align" onclick="showCodeWaiting();removeDuplicateHashtags()">Remove Duplicate Hashtags</button>
 
-      </div>
-
+    
+    <br>
+    <br>
+    <div class="task__card">
+      <H2 class="task__title"> Remove Duplicates Hashtags</H2>
+      <br>
+      <br>
+      <sl-button id="remove-markers-button" onclick="showProgressBar();removeDuplicateHashtags()">Remove</sl-button>
+  
+       <br>
+       <br>
+    </div>   
+  </div>
+    <footer class="footer">
+      <!--
+      <sl-icon-button toggle bind:checked="isDarkTheme" name="circle-half" label="Theme"></sl-icon-button>
+      <sl-icon-button  name="arrow-clockwise" label="Refresh"></sl-icon-button>
+      <sl-icon-button  name="info-circle" label="Refresh"></sl-icon-button>
+      <sl-icon-button  name="gear" label="Settings"></sl-icon-button>
+      -->
+    </footer>
+   
+ 
       <div id="content" style="margin-top:70px"> </div>
       <div id="success" style="margin-top:70px"> </div>    
       <div class="error" style="margin-top:70px"></div>    
       <div id="waiting" ></div>   
 
-      <sl-button toggle bind:checked="isDarkTheme"><sl-icon name="circle-half"></sl-icon></sl-button>
+     
   <script>
 
     var data = <?!= JSON.stringify(dataFromServerTemplate) ?>; 

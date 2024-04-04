@@ -1,22 +1,14 @@
 <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <script>
-
-document.addEventListener('DOMContentLoaded', () => {
-  initialize();
-});
+ $(function() 
+   {
+       initialize();     
+   }
+  );
  
 
-let isDarkTheme = false;
-
-// Function to toggle theme
-const toggleTheme = () => {
-  isDarkTheme = !isDarkTheme;
-  document.documentElement.classList.toggle('sl-theme-dark');
-};
-
-// Connect the button to the function
-document.querySelector('sl-button[toggle]').addEventListener('click', toggleTheme);
 
 function initialize(){
 
@@ -56,7 +48,16 @@ function initialize(){
 
     }
     
+
+    //const progressBar = document.getElementById("progressBar");
+    //progressBar.hidden = true; // Set the 'hidden' attribute to true
+
+    hideProgressBar();
+
+   
+    
     console.log(data.appSettings.appSettings)
+    console.log("jjj")
 }
 
 
@@ -80,7 +81,9 @@ function markDuplicates() {
 }
     
 function duplicateMarkedJS(msg){
-  hideCodeWaiting();
+  hideProgressBar();
+
+  //hideCodeWaiting();
   $('#set-markers-button').prop('disabled', false);
   $('#remove-markers-button').prop('disabled', false);
   var div = $('<div id="success">' +msg + '</div>');
@@ -102,7 +105,8 @@ function removeDuplicateHashtags(){
 }
 
 function returnRemoveDuplicateHashtagsJS(msg){
-    hideCodeWaiting();
+    hideProgressBar();
+    //hideCodeWaiting();
     $('#set-markers-button').prop('disabled', false);
   $('#remove-markers-button').prop('disabled', false);
   var div = $('<div id="success">' +msg + '</div>');
@@ -127,7 +131,16 @@ function showError(msg) {
 }
 
 
-function showCodeWaiting() {
+
+function showProgressBar() {
+  $('#progresssBar').show();
+}
+
+function hideProgressBar() {
+  $('#progresssBar').hide();
+}
+
+/*function showCodeWaiting() {
   console.log("show")
   $('#waiting').html("<img src='https://storage.googleapis.com/bkper-public/addons/loading_3dots.gif'/>")
 }
@@ -137,6 +150,7 @@ function hideCodeWaiting() {
   $('#waiting').html('')
   
 }
+*/
 
 //function closeDialog() { window.top.close(); }
 
@@ -161,5 +175,5 @@ function returnAppSettingsJS(object){
     console.log("apsettings: " + appSettings)
 
 }
-
+/* */ 
 </script>  
