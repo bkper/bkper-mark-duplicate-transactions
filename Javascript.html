@@ -12,6 +12,8 @@
 
 function initialize(){
 
+    //document.getElementById("alert_success").open = true;
+ 
     const bookName = document.getElementById("book-name");
     bookName.innerHTML = data.bookName;
 
@@ -86,11 +88,24 @@ function duplicateMarkedJS(msg){
   //hideCodeWaiting();
   $('#set-markers-button').prop('disabled', false);
   $('#remove-markers-button').prop('disabled', false);
-  var div = $('<div id="success">' +msg + '</div>');
-  setTimeout(function() {
-    $('#success').remove();
-  }, 11000); // auto-dismiss message after 5s.
-  $('#content').after(div);
+
+  //var div = $('<div id="success">' +msg + '</div>');
+  //setTimeout(function() {
+  //  $('#success').remove();
+  //}, 11000); // auto-dismiss message after 5s.
+  // $('#content').after(div);
+
+  const alert = document.getElementById("mark_alert_success");
+  const message = document.getElementById("mark_error_msg").innerHTML= msg;
+  alert.open = true;
+    setTimeout(function() {
+      alert.open =false;
+      message.innerHTML="";
+    }, 11000); 
+   
+  
+
+
   console.log(msg);
 }
 
@@ -108,14 +123,38 @@ function returnRemoveDuplicateHashtagsJS(msg){
     hideProgressBar();
     //hideCodeWaiting();
     $('#set-markers-button').prop('disabled', false);
-  $('#remove-markers-button').prop('disabled', false);
-  var div = $('<div id="success">' +msg + '</div>');
-  setTimeout(function() {
-    $('#success').remove();
-  }, 11000); // auto-dismiss message after 5s.
+    $('#remove-markers-button').prop('disabled', false);
+    var div = $('<div id="success">' +msg + '</div>');
+      setTimeout(function() {
+       $('#success').remove();
+      }, 11000); // auto-dismiss message after 5s.
   $('#content').after(div);
   console.log(msg);
 }
+
+function returnRemoveDuplicateHashtagsJS(msg){
+    hideProgressBar();
+    //hideCodeWaiting();
+    $('#set-markers-button').prop('disabled', false);
+    $('#remove-markers-button').prop('disabled', false);
+   
+    //var div = $('<div id="success">' +msg + '</div>');
+    //  setTimeout(function() {
+    //   $('#success').remove();
+    //  }, 11000); // auto-dismiss message after 5s.
+    //$('#content').after(div);
+
+   // const alert = document.querySelector('.alert-closable');
+   //    alert.addEventListener('sl-after-hide', () => {
+   //    setTimeout(() => (alert.open = true), 2000);
+   //  });    
+
+   $("#alert_success").open = true;
+
+  console.log(msg);
+}
+
+
 
 function showError(msg) {
   hideCodeWaiting()
@@ -140,17 +179,7 @@ function hideProgressBar() {
   $('#progresssBar').hide();
 }
 
-/*function showCodeWaiting() {
-  console.log("show")
-  $('#waiting').html("<img src='https://storage.googleapis.com/bkper-public/addons/loading_3dots.gif'/>")
-}
 
-function hideCodeWaiting() {
-  console.log("hide")
-  $('#waiting').html('')
-  
-}
-*/
 
 //function closeDialog() { window.top.close(); }
 

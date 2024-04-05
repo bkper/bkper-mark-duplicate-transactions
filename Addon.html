@@ -14,7 +14,7 @@
   <br>
   <div class="main"> 
      <div class="book__card">
-        <div id="book-name" class="book__name"> </div>
+      <sl-icon  name="book" label="book" class="book__icon"></sl-icon><div id="book-name" class="book__name"> </div>
      </div>
      
      <div class="task__card">
@@ -33,21 +33,44 @@
       <sl-checkbox id="description">Description</sl-checkbox><br>
       <br>
       <br>
-      <sl-button id="set-markers-button" onclick="showProgressBar(),markDuplicates()">Mark</sl-button>
-      <br>
+      <sl-button id="set-markers-button" style="margin-bottom:20px" onclick="showProgressBar(),markDuplicates()">Mark</sl-button>
+      
+
+ 
+
+      <sl-alert variant="success" close closable id="mark_alert_success" >
+         <sl-icon slot="icon" name="check2-circle"></sl-icon>
+         <strong>Duplicates marked</strong><br />
+          Search for <strong> #possibleduplicate </strong> in your book.
+      </sl-alert>
+
+      <sl-alert variant="danger" close closable id="mark_alert_danger">
+        <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
+        <strong>Something went wrong</strong><br />
+        <div id="mark_error_msg"> </div>
+      </sl-alert>
     </div>
 
     
-    <br>
-    <br>
+    
     <div class="task__card">
       <H2 class="task__title"> Remove Duplicates Hashtags</H2>
       <br>
       <br>
-      <sl-button id="remove-markers-button" onclick="showProgressBar();removeDuplicateHashtags()">Remove</sl-button>
-  
-       <br>
-       <br>
+      <sl-button id="remove-markers-button" style="margin-bottom:20px" onclick="showProgressBar();removeDuplicateHashtags()">Remove</sl-button>
+
+
+      <sl-alert variant="success" close closable id="unmark_alert_success" >
+        <sl-icon slot="icon" name="check2-circle"></sl-icon>
+        <strong>Removed Hashtags</strong><br />
+         There should not be any duplicate #hashtags in your book anymore.
+     </sl-alert>
+
+     <sl-alert variant="danger" close closable id="unmark_alert_danger">
+       <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
+       <strong>Something went wrong</strong><br />
+       <div id="unmark_error_msg"> </div>
+     </sl-alert>
     </div>   
   </div>
     <footer class="footer">
@@ -60,10 +83,10 @@
     </footer>
    
  
-      <div id="content" style="margin-top:70px"> </div>
+      <div id="info" style="margin-top:70px"> </div>
       <div id="success" style="margin-top:70px"> </div>    
       <div class="error" style="margin-top:70px"></div>    
-      <div id="waiting" ></div>   
+       
 
      
   <script>
