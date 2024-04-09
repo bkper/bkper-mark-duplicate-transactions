@@ -50,16 +50,10 @@ function initialize(){
 
     }
     
-
-    //const progressBar = document.getElementById("progressBar");
-    //progressBar.hidden = true; // Set the 'hidden' attribute to true
-
     hideProgressBar();
 
-   
-    
     console.log(data.appSettings.appSettings)
-    console.log("jjj")
+    
 }
 
 
@@ -77,7 +71,7 @@ function markDuplicates() {
     const searchDescription = document.getElementById("description").checked;  
     
     google.script.run.withSuccessHandler(duplicateMarkedJS)
-        .withFailureHandler(showError).withUserObject(this)
+        .withFailureHandler(showMarkError).withUserObject(this)
         .markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription );
         //.findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription );
 }
@@ -88,25 +82,13 @@ function duplicateMarkedJS(msg){
   //hideCodeWaiting();
   $('#set-markers-button').prop('disabled', false);
   $('#remove-markers-button').prop('disabled', false);
-
-  //var div = $('<div id="success">' +msg + '</div>');
-  //setTimeout(function() {
-  //  $('#success').remove();
-  //}, 11000); // auto-dismiss message after 5s.
-  // $('#content').after(div);
-
   const alert = document.getElementById("mark_alert_success");
-  const message = document.getElementById("mark_error_msg").innerHTML= msg;
+  
   alert.open = true;
     setTimeout(function() {
       alert.open =false;
-      message.innerHTML="";
     }, 11000); 
-   
-  
-
-
-  console.log(msg);
+  //console.log(msg);
 }
 
 
@@ -115,7 +97,7 @@ function removeDuplicateHashtags(){
   $('#set-markers-button').prop('disabled', true);
   $('#remove-markers-button').prop('disabled', true);
     google.script.run.withSuccessHandler(returnRemoveDuplicateHashtagsJS)
-        .withFailureHandler(showError).withUserObject(this)
+        .withFailureHandler(showUnMarkError).withUserObject(this)
         .removeDuplicateHashtagsGS();
 }
 
@@ -124,53 +106,67 @@ function returnRemoveDuplicateHashtagsJS(msg){
     //hideCodeWaiting();
     $('#set-markers-button').prop('disabled', false);
     $('#remove-markers-button').prop('disabled', false);
-    var div = $('<div id="success">' +msg + '</div>');
-      setTimeout(function() {
-       $('#success').remove();
-      }, 11000); // auto-dismiss message after 5s.
-  $('#content').after(div);
-  console.log(msg);
-}
-
-function returnRemoveDuplicateHashtagsJS(msg){
-    hideProgressBar();
-    //hideCodeWaiting();
-    $('#set-markers-button').prop('disabled', false);
-    $('#remove-markers-button').prop('disabled', false);
+    const alert = document.getElementById("unmark_alert_success");
    
-    //var div = $('<div id="success">' +msg + '</div>');
-    //  setTimeout(function() {
-    //   $('#success').remove();
-    //  }, 11000); // auto-dismiss message after 5s.
-    //$('#content').after(div);
+    alert.open = true;
+    setTimeout(function() {
+      alert.open =false;
+    }, 11000); 
 
-   // const alert = document.querySelector('.alert-closable');
-   //    alert.addEventListener('sl-after-hide', () => {
-   //    setTimeout(() => (alert.open = true), 2000);
-   //  });    
-
-   $("#alert_success").open = true;
-
-  console.log(msg);
+  //console.log(msg);
 }
 
 
+//
+// Error Messages
+//
 
-function showError(msg) {
-  hideCodeWaiting()
+function showAppError(msg) {
+  hideProgressBar();
   $('#set-markers-button').prop('disabled', false);
   $('#remove-markers-button').prop('disabled', false);
   
-   var div = $('<div id="error">' +msg + '</div>');
-   
-  setTimeout(function() {
-    $('#error').remove();
-  }, 11000); // auto-dismiss message after 5s.
-  $('#content').after(div);
+    const alert = document.getElementById("app_alert_danger");
+    if(msg){const message = document.getElementById("app_alert_danger").innerHTML= msg}
+    alert.open = true;
+    setTimeout(function() {
+      alert.open =false;
+      message.innerHTML="";
+    }, 11000); 
+}
+
+function showMarkError(msg) {
+  hideProgressBar();
+  $('#set-markers-button').prop('disabled', false);
+  $('#remove-markers-button').prop('disabled', false);
+  
+    const alert = document.getElementById("mark_alert_danger");
+    if(msg){const message = document.getElementById("mark_error_msg").innerHTML= msg}
+    alert.open = true;
+    setTimeout(function() {
+      alert.open =false;
+      if(message){message.innerHTML=""};
+    }, 11000); 
+}
+
+function showUnMarkError(msg) {
+  hideProgressBar();
+  $('#set-markers-button').prop('disabled', false);
+  $('#remove-markers-button').prop('disabled', false);
+  
+    const alert = document.getElementById("unmark_alert_danger");
+    if(msg){const message = document.getElementById("unmark_error_msg").innerHTML= msg}
+    alert.open = true;
+    setTimeout(function() {
+      alert.open =false;
+      if(message){message.innerHTML=""};
+    }, 11000); 
 }
 
 
-
+// 
+// Progressbar handling
+// 
 function showProgressBar() {
   $('#progresssBar').show();
 }
@@ -183,11 +179,12 @@ function hideProgressBar() {
 
 //function closeDialog() { window.top.close(); }
 
-//  test
-
+//
+//  Tests
+// 
 function getAppSettings() {
     google.script.run.withSuccessHandler(returnAppSettingsJS)
-        .withFailureHandler(showError).withUserObject(this)
+        .withFailureHandler(showAppError).withUserObject(this)
         .getAppSettingsGS();
 }
 
