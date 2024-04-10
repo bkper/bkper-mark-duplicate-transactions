@@ -17,21 +17,18 @@ function doGet(e) {
         setUserProperty("bookDatePattern", bookDatePattern);
         var bookTimeZone = book.getTimeZone();
         setUserProperty("bookTimeZone", bookTimeZone);
-        //const bookTimeZoneOffset = book.getTimeZoneOffset();
-        Logger.log(bookDatePattern + " " + bookTimeZone);
-        //Logger.log("this book name  "+ bookName);
         var appSettings = getAppSettingsGS();
         var htmlTemplate = HtmlService.createTemplateFromFile('Addon');
         htmlTemplate.dataFromServerTemplate = { bookid: bookId, bookName: bookName, appSettings: appSettings };
         var htmlOutput = htmlTemplate.evaluate().setSandboxMode(HtmlService.SandboxMode.IFRAME)
             .setTitle('Bkper Duplicates');
+           
         return htmlOutput;
     }
 }
 function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription) {
     var afterDate = getFormatedDate(startDate);
     var beforeDate = getFormatedDate(endDate);
-    //Logger.log("in " + afterDate + " " + beforeDate);
     var bookId = getUserProperty("bookId");
     var book = BkperApp.getBook(bookId);
     var permission = book.getPermission();
@@ -46,9 +43,7 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
     setUserProperty("searchFrom", searchFrom);
     setUserProperty("searchTo", searchTo);
     setUserProperty("searchDescription", searchDescription);
-    Logger.log("book get transactions a");
-    var transactions = book.getTransactions("after: " + afterDate + " before: " + beforeDate);
-    Logger.log("book get transactions b");
+    var transactions = book.getTransactions("after: " + afterDate + " before: " + beforeDate);  
     var uniqueIdentifiers = {};
     var duplicates = {};
     while (transactions.hasNext()) {
@@ -85,13 +80,13 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
             uniqueIdentifiers[identifier] = transaction.getId();
         }
     }
+    //Logger.log("duplicates: " + duplicates[0])
     for (var identifier in duplicates) {
         var duplicateIds = duplicates[identifier];
         var random = Math.floor(Math.random() * 10000000000);
         for (var i = 0; i < duplicateIds.length; i++) {
             var tx = book.getTransaction(duplicateIds[i]);
             var description = tx.getDescription();
-            Logger.log("testing record only " + description);
             if (description.indexOf("#possibleduplicate") === -1) {
                 description += " #possibleduplicate #dup_".concat(random);
                 tx.setDescription(description);
@@ -102,11 +97,6 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
         var tx1 = book.getTransaction(duplicateIds[0]);
         var amount = tx1.getAmount();
         var date = tx1.getDate();
-        Logger.log("Duplicate transactions found:");
-        Logger.log("IDs: ".concat(duplicateIds.join(", ")));
-        Logger.log("Amount: ".concat(amount));
-        Logger.log("Date: ".concat(date));
-        Logger.log(" test Random number: ".concat(random));
     }
     return "Duplicates Marked";
 }
@@ -137,7 +127,7 @@ function getAppSettingsGS() {
     var searchFrom = getUserProperty("searchFrom");
     var searchTo = getUserProperty("searchTo");
     var searchDescription = getUserProperty("searchDescription");
-    Logger.log("getappsettingsgs searchfrom " + searchFrom);
+    //Logger.log("getappsettingsgs searchfrom " + searchFrom);
     if (startDate === null && endDate === null && searchDate === null && searchAmount === null && searchFrom === null && searchTo === null && searchDescription === null) {
         var appSettings = false;
     }
@@ -159,5 +149,7 @@ function getUserProperty(propertyKey) {
 }
 function getFormatedDate(inputDate) {
     var bookDatePattern = getUserProperty("bookDatePattern");
-    return Utilities.formatDate(new Date(inputDate), Session.getScriptTimeZone(), bookDatePattern);
+    // this gave time differences
+    //return Utilities.formatDate(new Date(inputDate), Session.getScriptTimeZone(), bookDatePattern); 
+    return Utilities.formatDate(new Date(inputDate), "GMT", bookDatePattern);
 }

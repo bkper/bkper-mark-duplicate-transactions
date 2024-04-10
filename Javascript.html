@@ -78,13 +78,15 @@ function markDuplicates() {
     
 function duplicateMarkedJS(msg){
   hideProgressBar();
-
+  console.log(msg)
   //hideCodeWaiting();
   $('#set-markers-button').prop('disabled', false);
   $('#remove-markers-button').prop('disabled', false);
-  const alert = document.getElementById("mark_alert_success");
+  const alert = document.getElementById("mark_alert");
   
   alert.open = true;
+  alert.setAttribute('variant', 'success');
+
     setTimeout(function() {
       alert.open =false;
     }, 11000); 
@@ -106,8 +108,8 @@ function returnRemoveDuplicateHashtagsJS(msg){
     //hideCodeWaiting();
     $('#set-markers-button').prop('disabled', false);
     $('#remove-markers-button').prop('disabled', false);
-    const alert = document.getElementById("unmark_alert_success");
-   
+    const alert = document.getElementById("unmark_alert");
+    alert.setAttribute('variant', 'success');
     alert.open = true;
     setTimeout(function() {
       alert.open =false;
@@ -126,8 +128,9 @@ function showAppError(msg) {
   $('#set-markers-button').prop('disabled', false);
   $('#remove-markers-button').prop('disabled', false);
   
-    const alert = document.getElementById("app_alert_danger");
+    const alert = document.getElementById("app_alert");
     if(msg){const message = document.getElementById("app_alert_danger").innerHTML= msg}
+    alert.setAttribute('variant', 'danger');
     alert.open = true;
     setTimeout(function() {
       alert.open =false;
@@ -140,8 +143,9 @@ function showMarkError(msg) {
   $('#set-markers-button').prop('disabled', false);
   $('#remove-markers-button').prop('disabled', false);
   
-    const alert = document.getElementById("mark_alert_danger");
+    const alert = document.getElementById("mark_alert");
     if(msg){const message = document.getElementById("mark_error_msg").innerHTML= msg}
+    alert.setAttribute('variant', 'danger');
     alert.open = true;
     setTimeout(function() {
       alert.open =false;
@@ -154,8 +158,9 @@ function showUnMarkError(msg) {
   $('#set-markers-button').prop('disabled', false);
   $('#remove-markers-button').prop('disabled', false);
   
-    const alert = document.getElementById("unmark_alert_danger");
+    const alert = document.getElementById("unmark_alert");
     if(msg){const message = document.getElementById("unmark_error_msg").innerHTML= msg}
+    alert.setAttribute('variant', 'danger');
     alert.open = true;
     setTimeout(function() {
       alert.open =false;
@@ -176,8 +181,11 @@ function hideProgressBar() {
 }
 
 
+function reLoad(){
+  google.script.run.doGet();
+}
 
-//function closeDialog() { window.top.close(); }
+function closeDialog() { window.top.close(); }
 
 //
 //  Tests

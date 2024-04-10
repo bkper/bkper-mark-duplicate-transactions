@@ -7,16 +7,18 @@
 
 <body>
   <header class="header">
-    <h1 class="header__title">Duplicate Transactions</h1> 
+    <h1 class="header__title">Duplicate Transactions</h1> <sl-icon-button  name="x" label="Settings" style="font-size: 1.3rem;" onclick="closeDialog()"></sl-icon-button>
   </header>
   <sl-progress-bar id="progresssBar" style="--height: 4px;" indeterminate></sl-progress-bar>
   <br>
   <br>
   <div class="main"> 
+
      <div class="book__card">
       <sl-icon  name="book" label="book" class="book__icon"></sl-icon><div id="book-name" class="book__name"> </div>
      </div>
-     <sl-alert variant="danger" close closable id="app_alert_danger">
+
+    <sl-alert variant="" close closable id="app_alert">
       <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
       <strong>Something went wrong</strong><br />
       <div id="app_error_msg"> </div>
@@ -24,11 +26,10 @@
      
      <div class="task__card">
            <H2 class="task__title"> Mark Duplicates</H2>
-    
         <br>
-        Start Date: <sl-input type="date" placeholder="Date" id="start-date" ></sl-input>
+        Start Date => <sl-input type="date" placeholder="Date" id="start-date" ></sl-input>
         <br>
-       End Date: <sl-input type="date" placeholder="Date" id="end-date"></sl-input>
+       Before Date < <sl-input type="date" placeholder="Date" id="end-date"></sl-input>
        <br>
        <br>
       <sl-checkbox id="date">Date</sl-checkbox><br>
@@ -43,17 +44,12 @@
 
  
 
-      <sl-alert variant="success" close closable id="mark_alert_success" >
+      <sl-alert variant="" close closable id="mark_alert" >
          <sl-icon slot="icon" name="check2-circle"></sl-icon>
          <strong>Duplicates marked</strong><br />
           Search for <strong> #possibleduplicate </strong> in your book.
       </sl-alert>
 
-      <sl-alert variant="danger" close closable id="mark_alert_danger">
-        <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
-        <strong>Something went wrong</strong><br />
-        <div id="mark_error_msg"> </div>
-      </sl-alert>
     </div>
 
     
@@ -65,32 +61,28 @@
       <sl-button id="remove-markers-button" style="margin-bottom:20px" onclick="showProgressBar();removeDuplicateHashtags()">Remove</sl-button>
 
 
-      <sl-alert variant="success" close closable id="unmark_alert_success" >
+      <sl-alert variant="success" close closable id="unmark_alert" >
         <sl-icon slot="icon" name="check2-circle"></sl-icon>
         <strong>Removed Hashtags</strong><br />
          There should not be any duplicate #hashtags in your book anymore.
      </sl-alert>
 
-     <sl-alert variant="danger" close closable id="unmark_alert_danger">
-       <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
-       <strong>Something went wrong</strong><br />
-       <div id="unmark_error_msg"> </div>
-     </sl-alert>
+    
     </div>   
   </div>
-    <footer class="footer">
+    <footer class="footer" >
       <!--
       <sl-icon-button toggle bind:checked="isDarkTheme" name="circle-half" label="Theme"></sl-icon-button>
       <sl-icon-button  name="arrow-clockwise" label="Refresh"></sl-icon-button>
       <sl-icon-button  name="info-circle" label="Refresh"></sl-icon-button>
       <sl-icon-button  name="gear" label="Settings"></sl-icon-button>
       -->
+      <sl-icon-button  name="info-circle" label="Refresh"></sl-icon-button>
+      <sl-icon-button  name="gear" label="Settings"></sl-icon-button>
+      
     </footer>
    
  
-      <div id="info" style="margin-top:70px"> </div>
-      <div id="success" style="margin-top:70px"> </div>    
-      <div class="error" style="margin-top:70px"></div>    
        
 
      

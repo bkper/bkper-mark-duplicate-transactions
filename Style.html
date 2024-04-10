@@ -18,6 +18,19 @@ body {
   justify-content: space-between;
 }
 
+.header sl-icon-button::part(base) {
+    color: #fff;
+  }
+
+  .header sl-icon-button::part(base):hover,
+  .header sl-icon-button::part(base):focus {
+    color: #6853cf;
+  }
+
+  .header sl-icon-button::part(base):active {
+    color: #99999a;
+  }
+
 .header.dark {
   background-color: #212529; /* Dark theme background color */
 }
@@ -26,6 +39,9 @@ body {
   font-size: 1.5rem;
   margin: 0;
 }
+
+
+
 
 .main {
     margin-left: 20px;
@@ -70,13 +86,27 @@ body {
 }
 
 .footer {
-  background-color: black; /* Default background color */
-  color: white; /* Default text color */
   padding: 0.5rem;
   text-align: left;
+  font-size: 22px;
+  background: var(--sl-color-neutral-1000); 
+  
 }
 
 
+.footer sl-icon-button::part(base) {
+    color: #fff;
+  }
+
+  .footer sl-icon-button::part(base):hover,
+  .footer sl-icon-button::part(base):focus {
+    color: #6853cf;
+  }
+
+  .footer sl-icon-button::part(base):active {
+    color: #99999a;
+  }
+  
 
 
 /* Optional styles for the button (can be customized) */
