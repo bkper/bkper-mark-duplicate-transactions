@@ -10,8 +10,7 @@
     <h1 class="header__title">Duplicate Transactions</h1> <sl-icon-button  name="x" label="Settings" style="font-size: 1.3rem;" onclick="closeDialog()"></sl-icon-button>
   </header>
   <sl-progress-bar id="progresssBar" style="--height: 4px;" indeterminate></sl-progress-bar>
-  <br>
-  <br>
+  
   <div class="main"> 
 
      <div class="book__card">
@@ -24,48 +23,60 @@
       <div id="app_error_msg"> </div>
     </sl-alert>
      
-     <div class="task__card">
-           <H2 class="task__title"> Mark Duplicates</H2>
-        <br>
-        Start Date => <sl-input type="date" placeholder="Date" id="start-date" ></sl-input>
-        <br>
-       Before Date < <sl-input type="date" placeholder="Date" id="end-date"></sl-input>
-       <br>
-       <br>
-      <sl-checkbox id="date">Date</sl-checkbox><br>
-      <sl-checkbox id="amount">Amount</sl-checkbox><br>
-      <sl-checkbox id="fromaccount">From</sl-checkbox><br>
-      <sl-checkbox id="toaccount">To</sl-checkbox><br>
-      <sl-checkbox id="description">Description</sl-checkbox><br>
-      <br>
-      <br>
-      <sl-button id="set-markers-button" style="margin-bottom:20px" onclick="showProgressBar(),markDuplicates()">Mark</sl-button>
+
+    <sl-tab-group>
+      <sl-tab slot="nav" panel="mark">Mark Duplicates</sl-tab>
+      <sl-tab slot="nav" panel="unMark">Clean Hashtags</sl-tab>
       
+    
+      <sl-tab-panel name="mark">
+          <div class="task__card">
+             <H2 class="task__title"> Mark Duplicates</H2>
+            <br>
+            Start Date => <sl-input type="date" placeholder="Date" id="start-date" ></sl-input>
+            <br>
+            Before Date < <sl-input type="date" placeholder="Date" id="end-date"></sl-input>
+            <br>
+            <br>
+            <sl-checkbox id="date">Date</sl-checkbox><br>
+            <sl-checkbox id="amount">Amount</sl-checkbox><br>
+            <sl-checkbox id="fromaccount">From</sl-checkbox><br>
+            <sl-checkbox id="toaccount">To</sl-checkbox><br>
+            <sl-checkbox id="description">Description</sl-checkbox><br>
+            <br>
+            <br>
+            <sl-button id="set-markers-button" style="margin-bottom:20px" onclick="showProgressBar(),markDuplicates()">Mark</sl-button>
+          
+            <sl-alert variant="" close closable id="mark_alert" >
+               <sl-icon slot="icon" name="check2-circle"></sl-icon>
+               <strong>Duplicates marked</strong><br />
+                Search for <strong> #possibleduplicate </strong> in your book.
+            </sl-alert>   
+          </div>
+      </sl-tab-panel>
+    
+    
+      <sl-tab-panel name="unMark">
+        <div class="task__card">
+          <H2 class="task__title"> Remove Duplicates Hashtags</H2>
+          <br>
+          <br>
+          <sl-button id="remove-markers-button" style="margin-bottom:20px" onclick="showProgressBar();removeDuplicateHashtags()">Remove</sl-button>
+    
+    
+          <sl-alert variant="success" close closable id="unmark_alert" >
+            <sl-icon slot="icon" name="check2-circle"></sl-icon>
+            <strong>Removed Hashtags</strong><br />
+             There should not be any duplicate #hashtags in your book anymore.
+         </sl-alert>
+      </sl-tab-panel>
+    </sl-tab-group>
 
- 
-
-      <sl-alert variant="" close closable id="mark_alert" >
-         <sl-icon slot="icon" name="check2-circle"></sl-icon>
-         <strong>Duplicates marked</strong><br />
-          Search for <strong> #possibleduplicate </strong> in your book.
-      </sl-alert>
-
-    </div>
+     
 
     
     
-    <div class="task__card">
-      <H2 class="task__title"> Remove Duplicates Hashtags</H2>
-      <br>
-      <br>
-      <sl-button id="remove-markers-button" style="margin-bottom:20px" onclick="showProgressBar();removeDuplicateHashtags()">Remove</sl-button>
-
-
-      <sl-alert variant="success" close closable id="unmark_alert" >
-        <sl-icon slot="icon" name="check2-circle"></sl-icon>
-        <strong>Removed Hashtags</strong><br />
-         There should not be any duplicate #hashtags in your book anymore.
-     </sl-alert>
+   
 
     
     </div>   

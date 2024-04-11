@@ -11,8 +11,6 @@
 
 
 function initialize(){
-
-    //document.getElementById("alert_success").open = true;
  
     const bookName = document.getElementById("book-name");
     bookName.innerHTML = data.bookName;
@@ -185,7 +183,13 @@ function reLoad(){
   google.script.run.doGet();
 }
 
+
+// 
+// window operations
+//
 function closeDialog() { window.top.close(); }
+
+
 
 //
 //  Tests
