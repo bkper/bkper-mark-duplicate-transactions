@@ -48,18 +48,20 @@ function initialize(){
 
     }
     
-    hideProgressBar();
+   
+    showProgressBar(false)
 
-    console.log(data.appSettings.appSettings)
+    
     
 }
 
 
-
-
+//
+// Mark Duplicates
+//
 function markDuplicates() {
-  $('#set-markers-button').prop('disabled', true);
-  $('#remove-markers-button').prop('disabled', true);
+    document.getElementById('set-markers-button').disabled = true;
+  
     const startDate = document.getElementById("start-date").value;
     const endDate = document.getElementById("end-date").value;
     const searchDate = document.getElementById("date").checked;
@@ -69,118 +71,77 @@ function markDuplicates() {
     const searchDescription = document.getElementById("description").checked;  
     
     google.script.run.withSuccessHandler(duplicateMarkedJS)
-        .withFailureHandler(showMarkError).withUserObject(this)
+        .withFailureHandler(showError).withUserObject(this)
         .markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription );
-        //.findDuplicatesGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription );
+       
 }
     
 function duplicateMarkedJS(msg){
-  hideProgressBar();
-  console.log(msg)
-  //hideCodeWaiting();
-  $('#set-markers-button').prop('disabled', false);
-  $('#remove-markers-button').prop('disabled', false);
-  const alert = document.getElementById("mark_alert");
-  
-  alert.open = true;
-  alert.setAttribute('variant', 'success');
-
-    setTimeout(function() {
-      alert.open =false;
-    }, 11000); 
-  //console.log(msg);
+  showProgressBar(false);
+  document.getElementById('set-markers-button').disabled = false;
+  const text = "<strong>Duplicates Marked</strong><br>Search for <strong> #possibleduplicate </strong> in your book.";
+  alert("success", msg, text );
 }
 
 
 
-function removeDuplicateHashtags(){
-  $('#set-markers-button').prop('disabled', true);
-  $('#remove-markers-button').prop('disabled', true);
-    google.script.run.withSuccessHandler(returnRemoveDuplicateHashtagsJS)
-        .withFailureHandler(showUnMarkError).withUserObject(this)
+//
+// Unmark Duplicates
+//
+function unmarkDuplicates(){
+  document.getElementById('remove-markers-button').disabled = true;
+    google.script.run.withSuccessHandler(duplicatesUnmarkedJS)
+        .withFailureHandler(showError).withUserObject(this)
         .removeDuplicateHashtagsGS();
 }
 
-function returnRemoveDuplicateHashtagsJS(msg){
-    hideProgressBar();
-    //hideCodeWaiting();
-    $('#set-markers-button').prop('disabled', false);
-    $('#remove-markers-button').prop('disabled', false);
-    const alert = document.getElementById("unmark_alert");
-    alert.setAttribute('variant', 'success');
-    alert.open = true;
-    setTimeout(function() {
-      alert.open =false;
-    }, 11000); 
-
-  //console.log(msg);
+function duplicatesUnmarkedJS(msg){
+    showProgressBar(false)
+    document.getElementById('remove-markers-button').disabled = false;
+    const text = "<strong>Removed Hashtags</strong><br /><br>There should not be any duplicate #hashtags in your book anymore.";
+    alert("success", msg, text );
 }
 
 
 //
 // Error Messages
 //
-
-function showAppError(msg) {
-  hideProgressBar();
-  $('#set-markers-button').prop('disabled', false);
-  $('#remove-markers-button').prop('disabled', false);
-  
-    const alert = document.getElementById("app_alert");
-    if(msg){const message = document.getElementById("app_alert_danger").innerHTML= msg}
-    alert.setAttribute('variant', 'danger');
-    alert.open = true;
-    setTimeout(function() {
-      alert.open =false;
-      message.innerHTML="";
-    }, 11000); 
+function showError(msg){
+  showProgressBar(false)
+  document.getElementById('set-markers-button').disabled = false;
+  document.getElementById('remove-markers-button').disabled = false;
+  alert("danger", msg, "<strong>Something went wrong!</strong>");
 }
 
-function showMarkError(msg) {
-  hideProgressBar();
-  $('#set-markers-button').prop('disabled', false);
-  $('#remove-markers-button').prop('disabled', false);
-  
-    const alert = document.getElementById("mark_alert");
-    if(msg){const message = document.getElementById("mark_error_msg").innerHTML= msg}
-    alert.setAttribute('variant', 'danger');
-    alert.open = true;
-    setTimeout(function() {
-      alert.open =false;
-      if(message){message.innerHTML=""};
-    }, 11000); 
-}
 
-function showUnMarkError(msg) {
-  hideProgressBar();
-  $('#set-markers-button').prop('disabled', false);
-  $('#remove-markers-button').prop('disabled', false);
+//
+// Alert handler  
+// 
+function alert(variante, msg, text ){
+  const alert = document.getElementById("alert");
+  alert.variant = variante;
+
+  let message = null; 
+  let text_message = null; 
   
-    const alert = document.getElementById("unmark_alert");
-    if(msg){const message = document.getElementById("unmark_error_msg").innerHTML= msg}
-    alert.setAttribute('variant', 'danger');
-    alert.open = true;
-    setTimeout(function() {
-      alert.open =false;
+  if(msg){const message = document.getElementById("alert_msg").innerHTML= msg}
+  if(text){const text_message = document.getElementById("alert_text").innerHTML= text}
+  alert.open = true;
+  
+  setTimeout(function() {
       if(message){message.innerHTML=""};
-    }, 11000); 
+      if(text_message){text_message.innerHTML=""};
+      alert.open =false;
+  }, 11000); 
 }
 
 
 // 
 // Progressbar handling
 // 
-function showProgressBar() {
-  $('#progresssBar').show();
-}
-
-function hideProgressBar() {
-  $('#progresssBar').hide();
-}
-
-
-function reLoad(){
-  google.script.run.doGet();
+function showProgressBar(handle) {
+  const pb = document.getElementById('progresssBar');
+  pb.indeterminate = handle;
 }
 
 
@@ -188,6 +149,8 @@ function reLoad(){
 // window operations
 //
 function closeDialog() { window.top.close(); }
+
+
 
 
 

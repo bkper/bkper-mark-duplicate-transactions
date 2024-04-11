@@ -21,7 +21,7 @@ function doGet(e) {
         var htmlTemplate = HtmlService.createTemplateFromFile('Addon');
         htmlTemplate.dataFromServerTemplate = { bookid: bookId, bookName: bookName, appSettings: appSettings };
         var htmlOutput = htmlTemplate.evaluate().setSandboxMode(HtmlService.SandboxMode.IFRAME)
-            .setTitle('Bkper Duplicates');
+            .setTitle('Tag Duplicate Transactions');
            
         return htmlOutput;
     }

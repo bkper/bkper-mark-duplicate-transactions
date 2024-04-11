@@ -1,100 +1,76 @@
 
 <!DOCTYPE html>
-<html    class="${isDarkTheme ? 'sl-theme-dark' : ''}">
+<html>
 <head>
-<title>Bkper Duplicates</title>
+<title>Duplicates Transactions</title>
 </head>
-
 <body>
   <header class="header">
-    <h1 class="header__title">Duplicate Transactions</h1> <sl-icon-button  name="x" label="Settings" style="font-size: 1.3rem;" onclick="closeDialog()"></sl-icon-button>
+    <h1 class="header__title">Tag duplicate transactions</h1> <sl-icon-button  name="x" label="Settings" style="font-size: 1.3rem;" onclick="closeDialog()"></sl-icon-button>
   </header>
   <sl-progress-bar id="progresssBar" style="--height: 4px;" indeterminate></sl-progress-bar>
   
   <div class="main"> 
-
      <div class="book__card">
       <sl-icon  name="book" label="book" class="book__icon"></sl-icon><div id="book-name" class="book__name"> </div>
      </div>
 
-    <sl-alert variant="" close closable id="app_alert">
-      <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
-      <strong>Something went wrong</strong><br />
-      <div id="app_error_msg"> </div>
-    </sl-alert>
-     
-
     <sl-tab-group>
-      <sl-tab slot="nav" panel="mark">Mark Duplicates</sl-tab>
-      <sl-tab slot="nav" panel="unMark">Clean Hashtags</sl-tab>
+      <sl-tab slot="nav" panel="mark">Tag Duplicates</sl-tab>
+      <sl-tab slot="nav" panel="unMark">Remove Hashtags</sl-tab>
       
     
-      <sl-tab-panel name="mark">
-          <div class="task__card">
-             <H2 class="task__title"> Mark Duplicates</H2>
-            <br>
-            Start Date => <sl-input type="date" placeholder="Date" id="start-date" ></sl-input>
-            <br>
-            Before Date < <sl-input type="date" placeholder="Date" id="end-date"></sl-input>
-            <br>
-            <br>
+      <sl-tab-panel name="mark" >
+          <div class="task__card" >
+             <H2 class="task__title" style="margin-bottom: 20px;"> Tag Duplicates</H2>
+           
+            Start Date => <sl-input type="date" placeholder="Date" id="start-date" style="margin-bottom: 14px;" ></sl-input>
+            
+            Before Date < <sl-input type="date" placeholder="Date" id="end-date" style="margin-bottom: 20px;" ></sl-input>
+          
             <sl-checkbox id="date">Date</sl-checkbox><br>
             <sl-checkbox id="amount">Amount</sl-checkbox><br>
             <sl-checkbox id="fromaccount">From</sl-checkbox><br>
             <sl-checkbox id="toaccount">To</sl-checkbox><br>
-            <sl-checkbox id="description">Description</sl-checkbox><br>
-            <br>
-            <br>
-            <sl-button id="set-markers-button" style="margin-bottom:20px" onclick="showProgressBar(),markDuplicates()">Mark</sl-button>
-          
-            <sl-alert variant="" close closable id="mark_alert" >
-               <sl-icon slot="icon" name="check2-circle"></sl-icon>
-               <strong>Duplicates marked</strong><br />
-                Search for <strong> #possibleduplicate </strong> in your book.
-            </sl-alert>   
+            <sl-checkbox id="description" style="margin-bottom: 20px;">Description</sl-checkbox><br>
+      
+            <sl-button id="set-markers-button" style="margin-bottom:18px" onclick=" showProgressBar(true),markDuplicates()">Tag</sl-button>
           </div>
       </sl-tab-panel>
     
     
       <sl-tab-panel name="unMark">
         <div class="task__card">
-          <H2 class="task__title"> Remove Duplicates Hashtags</H2>
+          <H2 class="task__title">Remove Hashtags</H2>
           <br>
           <br>
-          <sl-button id="remove-markers-button" style="margin-bottom:20px" onclick="showProgressBar();removeDuplicateHashtags()">Remove</sl-button>
-    
-    
-          <sl-alert variant="success" close closable id="unmark_alert" >
-            <sl-icon slot="icon" name="check2-circle"></sl-icon>
-            <strong>Removed Hashtags</strong><br />
-             There should not be any duplicate #hashtags in your book anymore.
-         </sl-alert>
+          <sl-button id="remove-markers-button" style="margin-bottom:20px" onclick=" showProgressBar(true);unmarkDuplicates()">Remove</sl-button>
+        </div>  
       </sl-tab-panel>
     </sl-tab-group>
+ 
+    <div class="message__card">
+      <sl-alert variant="" close closable id="alert">
+        <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
+        <div id="alert_text"> </div>
+        <div id="alert_msg"> </div>
+      </sl-alert>
+    </div>
 
-     
-
-    
-    
-   
-
-    
-    </div>   
-  </div>
+  </div>   <!-- main -->
+    <sl-alert variant="" close closable id="alert">
+      <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
+      <div id="alert_text"> </div>
+      <div id="alert_msg"> </div>
+    </sl-alert>
+  
     <footer class="footer" >
-      <!--
-      <sl-icon-button toggle bind:checked="isDarkTheme" name="circle-half" label="Theme"></sl-icon-button>
-      <sl-icon-button  name="arrow-clockwise" label="Refresh"></sl-icon-button>
-      <sl-icon-button  name="info-circle" label="Refresh"></sl-icon-button>
-      <sl-icon-button  name="gear" label="Settings"></sl-icon-button>
-      -->
-      <sl-icon-button  name="info-circle" label="Refresh"></sl-icon-button>
-      <sl-icon-button  name="gear" label="Settings"></sl-icon-button>
-      
+    <!--  <a href="https://bkper.com"  id="infoLink" ><sl-icon-button  name="info-circle" label="info"></sl-icon-button>   </a>    -->
+    &nbsp;
     </footer>
    
  
-       
+   
 
      
   <script>
