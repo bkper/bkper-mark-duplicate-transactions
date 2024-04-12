@@ -1,9 +1,45 @@
-# bkper-mark-duplicate-transactions
-Google Apps Script to find and mark duplicate transactions in a bkper book within a certain data range.
 
-One real transaction can be recorded more than ones in your Bkper book. 
-For example the Payment of the credit Card is recorded trough Credit Card Operator and the Bank Account from which it is paid. 
+## Bkper Duplicate Transactions App
 
-With many transactions on your book it can be hard to find these duplicate transactions and this Add-on makes it easier to find duplicates and [merge](https://help.bkper.com/en/articles/2667277-merge-transactions) them into one transaction. 
+This free App helps you find and merge duplicate transactions in your Bkper Books.
+
+Transactions are sometimes duplicated. This can happen when the same transaction is recorded by different sources, like your bank and credit card company.
+
+<img width="1282" alt="Bkper-transactions-with-some-repeated-transactions" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/b3d4f521-9775-45ef-8b26-1befd627ae4e">
 
 
+> In the image there are two duplicate transactions, still it can be hard to identify them visually. 
+
+<br>
+<br>
+
+## This is how it works
+
+Access Duplicate Transactions from the **context menu** (more) in your book.
+
+<img width="524" alt="bkper-duplicates-context-menu" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/e29e75dd-d714-4b91-8966-8624b16495cb">
+<br>
+<br>
+<br>
+
+1. **Set the criteria:** Specify a **date range** and choose which details (date, amount, accounts, or description) to compare for finding duplicates.
+2. **Automatic identification:** The app scans your transactions based on your selections and **tags potential duplicates with #hashtags**.
+3. **Easy review:** Each potential duplicate is marked with a **#possibleduplicate** hashtag in the description. Clicking it reveals a list of potentially matching transactions based on your criteria.
+4. **Identify Duplicates**: Multiple Transactions considered to be the repeated are marked with a unique hashtag #dup_1234567890. Clicking it reveals the supposedly repeated transactions. 
+5. **Merge duplicates:** Once you confirm a pair of transactions as duplicates, you can easily [merge](https://help.bkper.com/en/articles/2667277-merge-transactions) them into a single, accurate entry.
+6. **Remove Hashtags:** After merging duplicates, you can remove the hashtags from the app to keep **clean and organized records**.
+<br><br><br>
+<img width="379" alt="Bkper Duplicate Transactions App" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/ac29d1b4-8ae0-4bad-9993-de21b70dc7d1">
+
+
+## Installation
+
+
+
+1. Open your Bkper book.
+2. Go to Settings (⚙️) > Automations > Apps.
+3. Find and open "Duplicate Transactions" and click "Install."
+4. Upon first use, authenticate and authorize the App with your Google Account.
+
+<br><br><br>
+<img width="1524" alt="bkper automations portal duplicates App" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/b2429507-a04e-4d5d-a47a-ea2f5dda0ea0">
