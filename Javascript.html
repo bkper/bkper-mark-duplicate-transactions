@@ -1,14 +1,11 @@
 <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 
 <script>
- $(function() 
-   {
-       initialize();     
-   }
-  );
- 
 
+document.addEventListener("DOMContentLoaded", function() {
+  initialize();
+});
 
 function initialize(){
  
@@ -34,25 +31,14 @@ function initialize(){
         // last search conditions
         document.getElementById("start-date").value = data.appSettings.startDate;
         document.getElementById("end-date").value = data.appSettings.endDate;
-        if (data.appSettings.searchDate === "true" ){document.getElementById("date").checked = true} 
-        if (data.appSettings.searchDate === "false" ){document.getElementById("date").checked = false}
-        if (data.appSettings.searchAmount== "true" ){document.getElementById("amount").checked = true} 
-        if (data.appSettings.searchAmount== "false" ) {document.getElementById("amount").checked =false}
-        if (data.appSettings.searchFrom=== "true" ){document.getElementById("fromaccount").checked = true} 
-        if (data.appSettings.searchFrom=== "false" ) {document.getElementById("fromaccount").checked =false}
-        if (data.appSettings.searchTo=== "true"  ){ document.getElementById("toaccount").checked = true}
-        if (data.appSettings.searchTo=== "false" ) {document.getElementById("toaccount").checked = false}
-        if (data.appSettings.searchDescription=== "true"  ){ document.getElementById("description").checked = true}
-        if (data.appSettings.searchDescription=== "false" ){document.getElementById("description").checked = false}
-      
 
+        document.getElementById("date").checked = data.appSettings.searchDate === "true";
+        document.getElementById("amount").checked = data.appSettings.searchAmount === "true";
+        document.getElementById("fromaccount").checked = data.appSettings.searchFrom === "true";
+        document.getElementById("toaccount").checked = data.appSettings.searchTo === "true";
+        document.getElementById("description").checked = data.appSettings.searchDescription === "true";
     }
-    
-   
-    showProgressBar(false)
-
-    
-    
+    showProgressBar(false)    
 }
 
 
@@ -151,9 +137,6 @@ function showProgressBar(handle) {
 function closeDialog() { window.top.close(); }
 
 
-
-
-
 //
 //  Tests
 // 
@@ -176,5 +159,5 @@ function returnAppSettingsJS(object){
     console.log("apsettings: " + appSettings)
 
 }
-/* */ 
+ 
 </script>  
