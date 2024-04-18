@@ -153,3 +153,8 @@ function getFormatedDate(inputDate) {
     //return Utilities.formatDate(new Date(inputDate), Session.getScriptTimeZone(), bookDatePattern); 
     return Utilities.formatDate(new Date(inputDate), "GMT", bookDatePattern);
 }
+
+
+function testApp(){
+    doGet(var bookId="agtzfmJrcGVyLWhyZHITCxIGTGVkZ2VyGICAgKTP5LcJDA")
+}
