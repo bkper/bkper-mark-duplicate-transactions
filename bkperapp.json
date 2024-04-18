@@ -9,7 +9,7 @@
     "menuUrl": "https://script.google.com/macros/s/AKfycbwN7kM85FycJLSWncgfgACPr8gQmKgKaEuqx7KU1srDbUqnJjyT0N-lbxX4n0ujF3QADg/exec?bookId=${book.id}",
     "menuText": "Duplicate Transactions",
     "menuPopupWidth": "380",
-    "menuPopupHeight": "1500",
+    "menuPopupHeight": "1800",
     "repoPrivate": false,
     "deprecated": false,  
     "clientId":"633364650013-vqljb9n1fs9f8icpu952i8tg2jh41q1k.apps.googleusercontent.com",
