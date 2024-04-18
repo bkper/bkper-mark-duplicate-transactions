@@ -15,12 +15,7 @@
       <sl-icon  name="book" label="book" class="book__icon"></sl-icon><div id="book-name" class="book__name"> </div>
      </div>
 
-    <sl-tab-group>
-      <sl-tab slot="nav" panel="mark">Tag Duplicates</sl-tab>
-      <sl-tab slot="nav" panel="unMark">Remove Hashtags</sl-tab>
-      
     
-      <sl-tab-panel name="mark" >
           <div class="task__card" >
              <H2 class="task__title" style="margin-bottom: 20px;"> Tag Duplicates</H2>
            
@@ -36,10 +31,8 @@
       
             <sl-button id="set-markers-button" style="margin-bottom:18px" onclick=" showProgressBar(true),markDuplicates()">Tag</sl-button>
           </div>
-      </sl-tab-panel>
     
     
-      <sl-tab-panel name="unMark">
         <div class="task__card">
           <H2 class="task__title">Remove Hashtags</H2>
           <br>
@@ -47,7 +40,7 @@
           <sl-button id="remove-markers-button" style="margin-bottom:20px" onclick=" showProgressBar(true);unmarkDuplicates()">Remove</sl-button>
         </div>  
       </sl-tab-panel>
-    </sl-tab-group>
+    
  
     <div class="message__card">
       <sl-alert variant="" close closable id="alert">
