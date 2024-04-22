@@ -38,12 +38,13 @@ Access Duplicate Transactions from the **context menu** (more) in your book.
 
 1. **Set the criteria:** Specify a **date range** and choose which details (date, amount, accounts, or description) to compare for finding duplicates.
 2. **Automatic identification:** The app scans your transactions based on your selections and **tags potential duplicates with #hashtags**.
-3. **Easy review:** Each potential duplicate is marked with a **#possibleduplicate** hashtag in the description. Clicking it reveals a list of potentially matching transactions based on your criteria.
-4. **Identify Duplicates**: Multiple Transactions considered to be the repeated are marked with a unique hashtag #dup_1234567890. Clicking it reveals the supposedly repeated transactions. 
+3. **Easy review:** Each potential duplicate is marked with a **#possibleduplicate** hashtag in the description. Clicking it reveals a list of all potentially matching transactions based on your criteria.
+4. **Identify Duplicates**: Multiple Transactions considered to be the repeated are marked with a unique hashtag **#dup_1234567890**. Clicking it reveals the supposedly repeated transactions. 
 5. **Merge duplicates:** Once you confirm a pair of transactions as duplicates, you can easily [merge](https://help.bkper.com/en/articles/2667277-merge-transactions) them into a single, accurate entry.
 6. **Remove Hashtags:** After merging duplicates, you can remove the hashtags from the app to keep **clean and organized records**.
 <br><br><br>
-<img width="379" alt="Bkper Duplicate Transactions App" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/ac29d1b4-8ae0-4bad-9993-de21b70dc7d1">
+
+<img width="380" alt="Duplicate Transactions App" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/88000fb7-92eb-4003-9a6b-6fbef214289c">
 
 
 
@@ -51,7 +52,8 @@ Access Duplicate Transactions from the **context menu** (more) in your book.
 ## Restrictions & Limitations
 
 - This is a Beta and you need to request access to work with it. 
-- Duplicate Transactions marks 100 duplicates at a time, this to avoid any performance issues.  
+- Duplicate Transactions marks 100 duplicates at a time, this to avoid any performance issues.
+- You need edit permissions to mark duplicates. 
 
 
 
