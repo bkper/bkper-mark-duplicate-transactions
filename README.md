@@ -22,7 +22,8 @@ Transactions are sometimes duplicated. This can happen when the one real life tr
 4. Upon first use, authenticate and authorize the App with your Google Account.
 
 <br><br><br>
-<img width="1524" alt="bkper automations portal duplicates App" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/b2429507-a04e-4d5d-a47a-ea2f5dda0ea0">
+
+<img width="1524" alt="bkper-duplicate-transactions-002" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/500fa98d-07a5-4ac8-9439-757f41092ff3">
 
 
 ## This is how it works
