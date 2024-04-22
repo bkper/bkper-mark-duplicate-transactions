@@ -1,6 +1,6 @@
 {
   "name": "bkper-mark-duplicate-transactions",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Google Apps Script to find and mark duplicate transactions in a bkper book within a certain data range",
   "main": "Code.ts",
   "author": "Jacob",
