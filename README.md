@@ -13,6 +13,18 @@ Transactions are sometimes duplicated. This can happen when the one real life tr
 <br>
 <br>
 
+## Installation
+
+
+1. Open your Bkper book.
+2. Go to Settings (⚙️) > Automations > Apps.
+3. Find and open "Duplicate Transactions" and click "Install."
+4. Upon first use, authenticate and authorize the App with your Google Account.
+
+<br><br><br>
+<img width="1524" alt="bkper automations portal duplicates App" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/b2429507-a04e-4d5d-a47a-ea2f5dda0ea0">
+
+
 ## This is how it works
 
 Access Duplicate Transactions from the **context menu** (more) in your book.
@@ -32,17 +44,6 @@ Access Duplicate Transactions from the **context menu** (more) in your book.
 <img width="379" alt="Bkper Duplicate Transactions App" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/ac29d1b4-8ae0-4bad-9993-de21b70dc7d1">
 
 
-## Installation
-
-
-
-1. Open your Bkper book.
-2. Go to Settings (⚙️) > Automations > Apps.
-3. Find and open "Duplicate Transactions" and click "Install."
-4. Upon first use, authenticate and authorize the App with your Google Account.
-
-<br><br><br>
-<img width="1524" alt="bkper automations portal duplicates App" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/b2429507-a04e-4d5d-a47a-ea2f5dda0ea0">
 
 
 ## Restrictions & Limitations
