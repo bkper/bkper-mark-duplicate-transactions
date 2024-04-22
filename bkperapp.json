@@ -1,13 +1,13 @@
 {
     "id": "find-mark-duplicates",
-    "name": "Duplicate Transactions",
+    "name": "Duplicate Transactions App",
     "description": "Find and Mark Possible duplicate transactions in your Bkper book.",
     "ownerName": "Bkper",
     "ownerLogoUrl": "https://avatars.githubusercontent.com/u/11943086?v=4",
     "ownerWebsite": "https://bkper.com",
     "logoUrl": "https://static.thenounproject.com/png/2019781-200.png",
     "menuUrl": "https://script.google.com/macros/s/AKfycbwN7kM85FycJLSWncgfgACPr8gQmKgKaEuqx7KU1srDbUqnJjyT0N-lbxX4n0ujF3QADg/exec?bookId=${book.id}",
-    "menuUrlDev": "https://script.google.com/macros/s/AKfycbxQ9G_YH81QQw5AEh3Z3ZxmzQRRQ289WQami0vWsIgI/dev?bookId=${book.id}",
+    
     "menuText": "Duplicate Transactions",
     "menuPopupWidth": "380",
     "menuPopupHeight": "1100",
@@ -19,7 +19,8 @@
       "https://www.googleapis.com/auth/script.external_request"
     ],           
     "scriptId": "16DmNpSm0OBc36r2e0bNZUUHoEwRbmt5hIRMxYYL5yJiaFrRPxiuZPQm9",
-    "deploymentId": "AKfycbxUL_mOkAo6GMbHyOsiX7MnNndpD3YVypKnSCeshQ_lv6S2tsELLRQLtAAfjKQ5kJcdgw"
+    "deploymentId": "AKfycbwN7kM85FycJLSWncgfgACPr8gQmKgKaEuqx7KU1srDbUqnJjyT0N-lbxX4n0ujF3QADg"
+                     
       
 }
   
