@@ -1,14 +1,14 @@
 
-## Bkper Duplicate Transactions App
+## Duplicate Transactions 
 
 This free App helps you find and merge duplicate transactions in your Bkper Books.
 
-Transactions are sometimes duplicated. This can happen when the same transaction is recorded by different sources, like your bank and credit card company.
+Transactions are sometimes duplicated. This can happen when the one real life transaction is recorded through different sources. For example through your bank as well as credit card company.
 
 <img width="1282" alt="Bkper-transactions-with-some-repeated-transactions" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/b3d4f521-9775-45ef-8b26-1befd627ae4e">
 
 
-> In the image there are two duplicate transactions, still it can be hard to identify them visually. 
+> In the image above, there are two duplicate transactions, still it can be hard to identify them visually. 
 
 <br>
 <br>
@@ -43,3 +43,12 @@ Access Duplicate Transactions from the **context menu** (more) in your book.
 
 <br><br><br>
 <img width="1524" alt="bkper automations portal duplicates App" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/b2429507-a04e-4d5d-a47a-ea2f5dda0ea0">
+
+
+## Restrictions & Limitations
+
+- This is a Beta and you need to request access to work with it. 
+- Duplicate Transactions marks 100 duplicates at a time, this to avoid any performance issues.  
+
+
+
