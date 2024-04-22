@@ -109,6 +109,8 @@ function alert(variante, msg, text ){
 
   let message = null; 
   let text_message = null; 
+
+  if(msg==="You do not have enough permission to remove Duplicate hashtags " || msg==="You do not have enough permission to mark Duplicates") {text="";};
   
   if(msg){const message = document.getElementById("alert_msg").innerHTML= msg}
   if(text){const text_message = document.getElementById("alert_text").innerHTML= text}

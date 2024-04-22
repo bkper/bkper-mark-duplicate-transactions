@@ -1,7 +1,4 @@
 // Compiled using bkper-mark-duplicate-transactions 1.0.0 (TypeScript 4.9.5)
-// Compiled using bkper-mark-duplicate-transactions 1.0.0 (TypeScript 4.9.5)
-// Compiled using bkper-mark-duplicate-transactions 1.0.0 (TypeScript 4.9.5)
-// 
 function doGet(e) {
     if (!e || !e.parameter || !e.parameter.bookId) {
         // Handle the case when the bookId parameter is missing
@@ -21,7 +18,7 @@ function doGet(e) {
         var htmlTemplate = HtmlService.createTemplateFromFile('Addon');
         htmlTemplate.dataFromServerTemplate = { bookid: bookId, bookName: bookName, appSettings: appSettings };
         var htmlOutput = htmlTemplate.evaluate().setSandboxMode(HtmlService.SandboxMode.IFRAME)
-            .setTitle('Tag Duplicate Transactions');
+            .setTitle('Duplicate Transactions');
            
         return htmlOutput;
     }
@@ -77,7 +74,7 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
             else {
                 duplicates[identifier] = [uniqueIdentifiers[identifier], transaction.getId()];
             }
-            Logger.log("counter " + processedCount)
+           
         processedCount--;
         }
         
@@ -102,9 +99,6 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
         var amount = tx1.getAmount();
         var date = tx1.getDate();
     }
-
-    //return "Duplicates Marked";
-
     if (processedCount === 0) {
         return "Max Duplicates Marked, you have to repeat this.";
       } else {
@@ -166,6 +160,3 @@ function getFormatedDate(inputDate) {
 }
 
 
-function testApp(){
-    doGet(var bookId="agtzfmJrcGVyLWhyZHITCxIGTGVkZ2VyGICAgKTP5LcJDA")
-}
