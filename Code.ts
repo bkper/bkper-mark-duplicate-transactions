@@ -46,7 +46,9 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
     var transactions = book.getTransactions("after: " + afterDate + " before: " + beforeDate);  
     var uniqueIdentifiers = {};
     var duplicates = {};
-    while (transactions.hasNext()) {
+    var maxTxToMark = 100; // Change here
+    var processedCount = maxTxToMark; 
+    while (transactions.hasNext() && processedCount >= 1) {
         var transaction = transactions.next();
         var identifier = "";
         var criteria = [];
@@ -75,12 +77,15 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
             else {
                 duplicates[identifier] = [uniqueIdentifiers[identifier], transaction.getId()];
             }
+            Logger.log("counter " + processedCount)
+        processedCount--;
         }
+        
         else {
             uniqueIdentifiers[identifier] = transaction.getId();
         }
     }
-    //Logger.log("duplicates: " + duplicates[0])
+    
     for (var identifier in duplicates) {
         var duplicateIds = duplicates[identifier];
         var random = Math.floor(Math.random() * 10000000000);
@@ -90,7 +95,6 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
             if (description.indexOf("#possibleduplicate") === -1) {
                 description += " #possibleduplicate #dup_".concat(random);
                 tx.setDescription(description);
-                Logger.log("Im here");
                 tx.update();
             }
         }
@@ -98,7 +102,14 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
         var amount = tx1.getAmount();
         var date = tx1.getDate();
     }
-    return "Duplicates Marked";
+
+    //return "Duplicates Marked";
+
+    if (processedCount === 0) {
+        return "Max Duplicates Marked, you have to repeat this.";
+      } else {
+        return "Duplicates Marked.";
+      }
 }
 function removeDuplicateHashtagsGS() {
     var bookId = getUserProperty("bookId");

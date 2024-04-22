@@ -7,6 +7,7 @@
     "ownerWebsite": "https://bkper.com",
     "logoUrl": "https://static.thenounproject.com/png/2019781-200.png",
     "menuUrl": "https://script.google.com/macros/s/AKfycbwN7kM85FycJLSWncgfgACPr8gQmKgKaEuqx7KU1srDbUqnJjyT0N-lbxX4n0ujF3QADg/exec?bookId=${book.id}",
+    "menuUrlDev": "https://script.google.com/macros/s/AKfycbxQ9G_YH81QQw5AEh3Z3ZxmzQRRQ289WQami0vWsIgI/dev?bookId=${book.id}",
     "menuText": "Duplicate Transactions",
     "menuPopupWidth": "380",
     "menuPopupHeight": "1100",
