@@ -28,7 +28,7 @@ function initialize(){
     searchDate.checked = true;
     searchAmount.checked  = true;
     } else {
-        // last search conditions
+        // set the last search conditions
         document.getElementById("start-date").value = data.appSettings.startDate;
         document.getElementById("end-date").value = data.appSettings.endDate;
 
@@ -157,9 +157,6 @@ function returnAppSettingsJS(object){
     const searchTo =  object.searchTo;
     const searchDescription = object.searchDescription;
     const appSettings =object.appSettings;
-
-    console.log("apsettings: " + appSettings)
-
 }
  
 </script>  

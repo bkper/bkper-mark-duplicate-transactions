@@ -43,7 +43,7 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
     var transactions = book.getTransactions("after: " + afterDate + " before: " + beforeDate);  
     var uniqueIdentifiers = {};
     var duplicates = {};
-    var maxTxToMark = 100; // Change here
+    var maxTxToMark = 100; // Set the max number of duplicates to mark at once.
     var processedCount = maxTxToMark; 
     while (transactions.hasNext() && processedCount >= 1) {
         var transaction = transactions.next();
@@ -73,11 +73,9 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
             }
             else {
                 duplicates[identifier] = [uniqueIdentifiers[identifier], transaction.getId()];
-            }
-           
+            } 
         processedCount--;
         }
-        
         else {
             uniqueIdentifiers[identifier] = transaction.getId();
         }
@@ -105,6 +103,7 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
         return "Duplicates Marked.";
       }
 }
+
 function removeDuplicateHashtagsGS() {
     var bookId = getUserProperty("bookId");
     var book = BkperApp.getBook(bookId);
@@ -124,6 +123,7 @@ function removeDuplicateHashtagsGS() {
     }
     return "hashtags removed";
 }
+
 function getAppSettingsGS() {
     var startDate = getUserProperty("startDate");
     var endDate = getUserProperty("endDate");
@@ -132,7 +132,6 @@ function getAppSettingsGS() {
     var searchFrom = getUserProperty("searchFrom");
     var searchTo = getUserProperty("searchTo");
     var searchDescription = getUserProperty("searchDescription");
-    //Logger.log("getappsettingsgs searchfrom " + searchFrom);
     if (startDate === null && endDate === null && searchDate === null && searchAmount === null && searchFrom === null && searchTo === null && searchDescription === null) {
         var appSettings = false;
     }
@@ -142,16 +141,19 @@ function getAppSettingsGS() {
     var returnObject = { appSettings: appSettings, startDate: startDate, endDate: endDate, searchDate: searchDate, searchAmount: searchAmount, searchFrom: searchFrom, searchTo: searchTo, searchDescription: searchDescription };
     return returnObject;
 }
+
 function setUserProperty(propertyKey, propertyValue) {
     var userProperties = PropertiesService.getUserProperties();
     userProperties.setProperty(propertyKey, propertyValue);
     return;
 }
+
 function getUserProperty(propertyKey) {
     var userProperties = PropertiesService.getUserProperties();
     var propertyValue = userProperties.getProperty(propertyKey);
     return propertyValue;
 }
+
 function getFormatedDate(inputDate) {
     var bookDatePattern = getUserProperty("bookDatePattern");
     // this gave time differences
