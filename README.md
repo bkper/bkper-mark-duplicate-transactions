@@ -30,7 +30,8 @@ Transactions are sometimes duplicated. This can happen when the one real life tr
 
 Access Duplicate Transactions from the **context menu** (more) in your book.
 
-<img width="524" alt="bkper-duplicates-context-menu" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/e29e75dd-d714-4b91-8966-8624b16495cb">
+<img width="524" alt="bkper-duplicates-context-menu" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/0443ce09-0990-4a2b-9d5c-89d7a7e69a16">
+
 <br>
 <br>
 <br>
