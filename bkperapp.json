@@ -1,7 +1,7 @@
 {
-    "id": "find-mark-duplicates",
+    "id": "bkper-mark-duplicate-transactions",
     "name": "Duplicates App",
-    "description": "Find and Mark Possible duplicate transactions in your Bkper book.",
+    "description": "aaFind and Mark Possible duplicate transactions in your Bkper book.",
     "ownerName": "Bkper",
     "ownerLogoUrl": "https://avatars.githubusercontent.com/u/11943086?v=4",
     "ownerWebsite": "https://bkper.com",
