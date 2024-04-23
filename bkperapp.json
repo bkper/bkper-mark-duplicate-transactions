@@ -1,23 +1,27 @@
 {
-    "id": "bkper-mark-duplicate-transactions",
+    "id": "find-mark-duplicates",
     "name": "Duplicates App",
-    "description": "aaFind and Mark Possible duplicate transactions in your Bkper book.",
+    "description": "Find and Mark Possible duplicate transactions in your Bkper book.",
     "ownerName": "Bkper",
     "ownerLogoUrl": "https://avatars.githubusercontent.com/u/11943086?v=4",
     "ownerWebsite": "https://bkper.com",
+
     "logoUrl": "https://static.thenounproject.com/png/2019781-200.png",
-    "menuUrl": "https://script.google.com/macros/s/AKfycbyy4wNX3W4LBJ-XUtWk2to30c6ubuGJ-xANjENKEAsXdBpjxktEWQ4ouq9z_sON18uTHA/exec?bookId=${book.id}",
     "menuText": "Duplicate Transactions",
     "menuPopupWidth": "380",
     "menuPopupHeight": "1100",
     "repoPrivate": false,
     "deprecated": false,  
-    "clientId":"633364650013-vqljb9n1fs9f8icpu952i8tg2jh41q1k.apps.googleusercontent.com",
+    
     "scopes": [
       "https://www.googleapis.com/auth/userinfo.email",
       "https://www.googleapis.com/auth/script.external_request"
-    ],           
+    ], 
+                
+    "clientId":"633364650013-vqljb9n1fs9f8icpu952i8tg2jh41q1k.apps.googleusercontent.com",
     "scriptId": "16DmNpSm0OBc36r2e0bNZUUHoEwRbmt5hIRMxYYL5yJiaFrRPxiuZPQm9",
+     
+    "menuUrl": "https://script.google.com/macros/s/AKfycbyy4wNX3W4LBJ-XUtWk2to30c6ubuGJ-xANjENKEAsXdBpjxktEWQ4ouq9z_sON18uTHA/exec?bookId=${book.id}",
     "deploymentId": "AKfycbyy4wNX3W4LBJ-XUtWk2to30c6ubuGJ-xANjENKEAsXdBpjxktEWQ4ouq9z_sON18uTHA"
                      
       
