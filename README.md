@@ -57,5 +57,5 @@ Access Duplicate Transactions from the **context menu** (more) in your book.
 
 
 
-[Duplicate Transactions short video tutorial](https://youtu.be/T52O8uVSHno)
+[Duplicate Transactions short video tutorial](https://www.youtube.com/watch?v=XHtDnQyyOhs)
 

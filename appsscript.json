@@ -14,5 +14,10 @@
   "webapp": {
     "executeAs": "USER_ACCESSING",
     "access": "ANYONE"
-  }
+  },
+
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/script.external_request"
+  ]
 }
