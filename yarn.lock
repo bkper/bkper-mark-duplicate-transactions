@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@bkper/bkper-app-types@^3.29.1":
-  version "3.34.0"
-  resolved "https://registry.yarnpkg.com/@bkper/bkper-app-types/-/bkper-app-types-3.34.0.tgz#166da807c61f8482fa7697525d611826e4dd5dbf"
-  integrity sha512-TsESaUoljg7xiHILltLbeoC8UHzWyosSCaziPTmJiwNfoUWtPcy+oaoahuRSgIyqRS9JWLyhROA2PjmVy04ALw==
+"@bkper/bkper-app-types@^4.0.3":
+  version "3.34.2"
+  resolved "https://registry.yarnpkg.com/@bkper/bkper-app-types/-/bkper-app-types-3.34.2.tgz#5f9a83927aa7519abd3c624eb2e7de266ee09b2b"
+  integrity sha512-MEPpAEA+UaJ5m9DMQqhPgMBSUvjbzE2xwEljbbtQxXqpgHLT/WYoLnWV/9SSBEgLsNo3ymf05BQJv3WTQKsV8g==
   dependencies:
     "@types/google-apps-script" "*"
 
@@ -96,7 +96,7 @@ buffer-equal-constant-time@1.0.1:
   resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
   integrity sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==
 
-clasp-types@^1.4.0:
+clasp-types@^2.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/clasp-types/-/clasp-types-1.4.0.tgz#d5f9ac8e648cd72f41b3b2d6198e73c76267b0da"
   integrity sha512-fc0eQ4BHLyAll4HFEk7odCg8FAI2awJsTvqTO3ATUQ9S51cATo2icM3xlKn1462F5x9GF2DiIXutN270J1s/kA==
