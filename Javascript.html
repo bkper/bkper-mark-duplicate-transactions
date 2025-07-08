@@ -37,6 +37,7 @@ function initialize(){
         document.getElementById("fromaccount").checked = data.appSettings.searchFrom === "true";
         document.getElementById("toaccount").checked = data.appSettings.searchTo === "true";
         document.getElementById("description").checked = data.appSettings.searchDescription === "true";
+        document.getElementById("exclude-word").value = data.appSettings.excludeWord || "";
     }
     showProgressBar(false)    
 }
@@ -55,10 +56,11 @@ function markDuplicates() {
     const searchFrom = document.getElementById("fromaccount").checked;
     const searchTo = document.getElementById("toaccount").checked;
     const searchDescription = document.getElementById("description").checked;  
+    const excludeWord = document.getElementById("exclude-word").value;
     
     google.script.run.withSuccessHandler(duplicateMarkedJS)
         .withFailureHandler(showError).withUserObject(this)
-        .markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription );
+        .markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription, excludeWord);
        
 }
     

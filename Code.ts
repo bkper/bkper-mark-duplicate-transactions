@@ -23,7 +23,7 @@ function doGet(e) {
         return htmlOutput;
     }
 }
-function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription) {
+function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, searchAmount, searchFrom, searchTo, searchDescription, excludeWord) {
     var afterDate = getFormatedDate(startDate);
     var beforeDate = getFormatedDate(endDate);
     var bookId = getUserProperty("bookId");
@@ -40,6 +40,7 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
     setUserProperty("searchFrom", searchFrom);
     setUserProperty("searchTo", searchTo);
     setUserProperty("searchDescription", searchDescription);
+    setUserProperty("excludeWord", excludeWord);
     var transactions = book.getTransactions("after: " + afterDate + " before: " + beforeDate);  
     var uniqueIdentifiers = {};
     var duplicates = {};
@@ -47,6 +48,17 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
     var processedCount = maxTxToMark; 
     while (transactions.hasNext() && processedCount >= 1) {
         var transaction = transactions.next();
+        
+        // Skip transactions that contain any of the exclude words
+        if (excludeWord && excludeWord.trim() !== "" && transaction.getDescription()) {
+            const excludeWords = excludeWord.split(',').map(word => word.trim().toLowerCase());
+            const description = transaction.getDescription().toLowerCase();
+            const shouldExclude = excludeWords.some(word => word !== "" && description.indexOf(word) !== -1);
+            if (shouldExclude) {
+                continue;
+            }
+        }
+        
         var identifier = "";
         var criteria = [];
         // Set the criteria for identifying duplicates
@@ -132,13 +144,14 @@ function getAppSettingsGS() {
     var searchFrom = getUserProperty("searchFrom");
     var searchTo = getUserProperty("searchTo");
     var searchDescription = getUserProperty("searchDescription");
-    if (startDate === null && endDate === null && searchDate === null && searchAmount === null && searchFrom === null && searchTo === null && searchDescription === null) {
+    var excludeWord = getUserProperty("excludeWord");
+    if (startDate === null && endDate === null && searchDate === null && searchAmount === null && searchFrom === null && searchTo === null && searchDescription === null && excludeWord === null) {
         var appSettings = false;
     }
     else {
         var appSettings = true;
     }
-    var returnObject = { appSettings: appSettings, startDate: startDate, endDate: endDate, searchDate: searchDate, searchAmount: searchAmount, searchFrom: searchFrom, searchTo: searchTo, searchDescription: searchDescription };
+    var returnObject = { appSettings: appSettings, startDate: startDate, endDate: endDate, searchDate: searchDate, searchAmount: searchAmount, searchFrom: searchFrom, searchTo: searchTo, searchDescription: searchDescription, excludeWord: excludeWord };
     return returnObject;
 }
 

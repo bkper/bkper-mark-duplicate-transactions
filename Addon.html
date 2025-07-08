@@ -6,7 +6,7 @@
 </head>
 <body>
   <header class="header">
-    <h1 class="header__title">Tag duplicate transactions</h1> <sl-icon-button  name="x" label="Settings" style="font-size: 1.3rem;" onclick="closeDialog()"></sl-icon-button>
+    <h1 class="header__title">Tag duplicate transactionss</h1> <sl-icon-button  name="x" label="Settings" style="font-size: 1.3rem;" onclick="closeDialog()"></sl-icon-button>
   </header>
   <sl-progress-bar id="progresssBar" style="--height: 4px;" indeterminate></sl-progress-bar>
   
@@ -28,6 +28,9 @@
             <sl-checkbox id="fromaccount">From</sl-checkbox><br>
             <sl-checkbox id="toaccount">To</sl-checkbox><br>
             <sl-checkbox id="description" style="margin-bottom: 20px;">Description</sl-checkbox><br>
+      
+            Exclude words: <sl-input type="text" placeholder="Enter words to exclude (comma-separated)" id="exclude-word" style="margin-bottom: 8px;"></sl-input>
+            <div style="font-size: 12px; color: #666; margin-bottom: 20px;">Comma separated is an OR. Two words with a space is one word.</div>
       
             <sl-button id="set-markers-button" style="margin-bottom:18px" onclick=" showProgressBar(true),markDuplicates()">Tag</sl-button>
           </div>
