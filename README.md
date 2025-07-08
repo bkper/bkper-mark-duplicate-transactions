@@ -45,7 +45,7 @@ Access Duplicate Transactions from the **context menu** (more) in your book.
 7. **Remove Hashtags:** After merging duplicates, you can remove the hashtags from the app to keep **clean and organized records**.
 <br><br><br>
 
-<img width="380" alt="Duplicate Transactions App" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/88000fb7-92eb-4003-9a6b-6fbef214289c">
+<img width="380" alt="Duplicate Transactions App" src="bkper-duplicate-transactions.png">
 
 
 

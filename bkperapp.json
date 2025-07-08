@@ -11,7 +11,7 @@
     "menuPopupHeight": "1100",
     "repoPrivate": false,
     "deprecated": false,  
-    "menuUrl": "https://script.google.com/macros/s/AKfycbx6ujv_EprzVATsWRVVDfBTPmq4OMxdghNoausZ4_SfHcwwjdaO-jP91oZFqcbUYyiOfQ/exec?bookId=${book.id}"
+    "menuUrl": "https://script.google.com/macros/s/AKfycbzT8jgqpB663utfTpu2cy9oWEwEcG20UMsaNqoNS_QLLchYVhx6t8oNGn1WwQS_oPGsRA/exec?bookId=${book.id}"
     
                      
       
