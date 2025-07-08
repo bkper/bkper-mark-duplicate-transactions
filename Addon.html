@@ -6,9 +6,9 @@
 </head>
 <body>
   <header class="header">
-    <h1 class="header__title">Tag duplicate transactionss</h1> <sl-icon-button  name="x" label="Settings" style="font-size: 1.3rem;" onclick="closeDialog()"></sl-icon-button>
+    <h1 class="header__title">Tag duplicate transactions</h1> <sl-icon-button  name="x" label="Settings" style="font-size: 1.3rem;" onclick="closeDialog()"></sl-icon-button>
   </header>
-  <sl-progress-bar id="progresssBar" style="--height: 4px;" indeterminate></sl-progress-bar>
+  <sl-progress-bar id="progressBar" style="--height: 4px;" indeterminate></sl-progress-bar>
   
   <div class="main"> 
      <div class="book__card">
@@ -37,12 +37,11 @@
     
     
         <div class="task__card">
-          <H2 class="task__title">Remove Hashtags</H2>
+          <h2 class="task__title">Remove Hashtags</h2>
           <br>
           <br>
           <sl-button id="remove-markers-button" style="margin-bottom:20px" onclick=" showProgressBar(true);unmarkDuplicates()">Remove</sl-button>
-        </div>  
-      </sl-tab-panel>
+        </div>
     
  
     <div class="message__card">
@@ -54,11 +53,6 @@
     </div>
 
   </div>   <!-- main -->
-    <sl-alert variant="" close closable id="alert">
-      <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
-      <div id="alert_text"> </div>
-      <div id="alert_msg"> </div>
-    </sl-alert>
   
     <footer class="footer" >
     <a href="https://forms.gle/y2zJi2kk6CZwSJDF6"  id="infoLink" ><sl-icon-button  name="flag" label="flag" style="font-size: 18px;margin-left:20px"></sl-icon-button>   </a>   
