@@ -37,11 +37,12 @@ Access Duplicate Transactions from the **context menu** (more) in your book.
 <br>
 
 1. **Set the criteria:** Specify a **date range** and choose which details (date, amount, accounts, or description) to compare for finding duplicates.
-2. **Automatic identification:** The app scans your transactions based on your selections and **tags potential duplicates with #hashtags**.
-3. **Easy review:** Each potential duplicate is marked with a **#possibleduplicate** hashtag in the description. Clicking it reveals a list of all potentially matching transactions based on your criteria.
-4. **Identify Duplicates**: Multiple Transactions considered to be the repeated are marked with a unique hashtag **#dup_1234567890**. Clicking it reveals the supposedly repeated transactions. 
-5. **Merge duplicates:** Once you confirm a pair of transactions as duplicates, you can easily [merge](https://help.bkper.com/en/articles/2667277-merge-transactions) them into a single, accurate entry.
-6. **Remove Hashtags:** After merging duplicates, you can remove the hashtags from the app to keep **clean and organized records**.
+2. **Exclude words:** Optionally enter words to exclude from duplicate detection. Use comma-separated values for OR logic (e.g., "bank, wire" excludes transactions containing either "bank" OR "wire"). Words with spaces are treated as single phrases.
+3. **Automatic identification:** The app scans your transactions based on your selections and **tags potential duplicates with #hashtags**.
+4. **Easy review:** Each potential duplicate is marked with a **#possibleduplicate** hashtag in the description. Clicking it reveals a list of all potentially matching transactions based on your criteria.
+5. **Identify Duplicates**: Multiple Transactions considered to be the repeated are marked with a unique hashtag **#dup_1234567890**. Clicking it reveals the supposedly repeated transactions. 
+6. **Merge duplicates:** Once you confirm a pair of transactions as duplicates, you can easily [merge](https://help.bkper.com/en/articles/2667277-merge-transactions) them into a single, accurate entry.
+7. **Remove Hashtags:** After merging duplicates, you can remove the hashtags from the app to keep **clean and organized records**.
 <br><br><br>
 
 <img width="380" alt="Duplicate Transactions App" src="https://github.com/Jacobvdb/bkper-mark-duplicate-transactions/assets/2821547/88000fb7-92eb-4003-9a6b-6fbef214289c">
