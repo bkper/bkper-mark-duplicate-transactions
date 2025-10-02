@@ -41,9 +41,10 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
     setUserProperty("searchTo", searchTo);
     setUserProperty("searchDescription", searchDescription);
     setUserProperty("excludeWord", excludeWord);
-    var transactions = book.getTransactions("after: " + afterDate + " before: " + beforeDate);  
+    var transactions = book.getTransactions("after: " + afterDate + " before: " + beforeDate);
     var uniqueIdentifiers = {};
     var duplicates = {};
+    var duplicateCount = 0;
     var maxTxToMark = 100; // Set the max number of duplicates to mark at once.
     var processedCount = maxTxToMark; 
     while (transactions.hasNext() && processedCount >= 1) {
@@ -103,6 +104,7 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
                 description += " #possibleduplicate #dup_".concat(random);
                 tx.setDescription(description);
                 tx.update();
+                duplicateCount++;
             }
         }
         var tx1 = book.getTransaction(duplicateIds[0]);
@@ -110,9 +112,9 @@ function markPossibleDuplicateTransactionsGS(startDate, endDate, searchDate, sea
         var date = tx1.getDate();
     }
     if (processedCount === 0) {
-        return "Max Duplicates Marked, you have to repeat this.";
+        return "Max Duplicates Marked: " + duplicateCount + " transactions marked. You need to repeat this.";
       } else {
-        return "Duplicates Marked.";
+        return "Duplicates Marked: " + duplicateCount + " transactions marked.";
       }
 }
 
